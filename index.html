@@ -1,612 +1,238 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="rw">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Or Noir — Digital Dropshipping Media Boutique</title>
-  <meta name="description" content="Or Noir boutique: ibicuruzwa byiza, serivisi z'ubwenge (chatbot), amafoto y'ibicuruzwa, support kuri WhatsApp." />
-
-  <!-- Favicon minimal -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='0.9em' font-size='90'%3E%E2%9C%A8%3C/text%3E%3C/svg%3E">
-
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Or Noir — Digital Dropshipping Boutique</title>
   <style>
-    /* ------------------------------
-       Global variables and reset
-       ------------------------------ */
-    :root{
-      --bg:#0b1020; --card:#0f1724; --muted:#9aa4bf; --accent:#ff6b6b; --glass: rgba(255,255,255,0.06);
-      --glass-2: rgba(255,255,255,0.03);
-      --radius:14px;
-      --transition: 350ms cubic-bezier(.2,.9,.2,1);
-      --max-width:1100px;
-    }
-    [data-theme="light"]{
-      --bg:#f5f7fb; --card:#ffffff; --muted:#4b5563; --accent:#0ea5a4; --glass: rgba(0,0,0,0.03); --glass-2: rgba(0,0,0,0.02);
-    }
-
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;
-      background:var(--bg); color:var(--muted); -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale; line-height:1.45;
-      scroll-behavior:smooth;
-    }
-
-    /* ------------------------------
-       Page container
-       ------------------------------ */
-    .wrap{max-width:var(--max-width); margin:0 auto; padding:24px;}
-
-/* ------------------------------
-   Video background hero
-   ------------------------------ */
-.hero {
-  position:relative; height:88vh; min-height:520px; border-radius:0 0 28px 28px; overflow:hidden;
-  display:flex; align-items:center; justify-content:center; text-align:center; color:#fff;
-}
-.hero__bg{
-  position:absolute; inset:0; z-index:0; object-fit:cover; width:100%; height:100%;
-  background: linear-gradient(180deg, rgba(0,0,0,0.25), rgba(0,0,0,0.5));
-}
-.hero__fallback{
-  position:absolute; inset:0; background-size:cover; background-position:center; filter:blur(2px) brightness(.7);
-}
-.hero__overlay{position:relative; z-index:2; padding:28px; width:100%;}
-.hero h1{font-size:clamp(28px,5vw,52px); margin:0 0 8px; letter-spacing:-1px;}
-.hero p{margin:0 0 18px; font-size:clamp(14px,2.2vw,18px); color:rgba(255,255,255,.9)}
-.cta {
-  display:inline-flex; gap:10px; align-items:center; padding:14px 20px; border-radius:999px;
-  background:linear-gradient(90deg,var(--accent),#ffd166); color:#0b1020; font-weight:700; border:none; cursor:pointer;
-  box-shadow:0 8px 30px rgba(11,16,32,0.5); transform:translateZ(0);
-}
-.muted-note{font-size:13px; opacity:.9; margin-top:10px}
-
-/* ------------------------------
-   Nav and utilities
-   ------------------------------ */
-.topbar{display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 24px;}
-.brand{display:flex; align-items:center; gap:10px; color:#fff; text-decoration:none}
-.logo{
-  width:48px; height:48px; border-radius:10px; display:inline-grid; place-items:center; background:linear-gradient(135deg,#ffd166,#ff6b6b);
-  font-weight:800; color:#111;
-}
-.controls{display:flex; gap:10px; align-items:center;}
-.icon-btn{background:var(--glass); border:0; padding:8px 10px; border-radius:10px; cursor:pointer; color:var(--muted)}
-.theme-toggle{display:inline-flex; gap:8px; align-items:center; padding:8px; border-radius:16px; cursor:pointer; background:var(--glass-2)}
-
-/* ------------------------------
-   Stock table & cards
-   ------------------------------ */
-.section{padding:38px 0;}
-.section__inner{background:linear-gradient(180deg, transparent, rgba(0,0,0,0.02)); padding:18px; border-radius:16px}
-.table{width:100%; border-collapse:collapse; margin-top:12px}
-.table th, .table td{padding:12px; text-align:left; font-size:14px; color:var(--muted)}
-.table th{color:rgba(255,255,255,.85)}
-.product-img{width:84px; height:64px; object-fit:cover; border-radius:10px}
-
-/* animated entry */
-.animated-item{opacity:0; transform:translateY(18px); transition:var(--transition)}
-
-/* ------------------------------
-   Testimonials & spinner
-   ------------------------------ */
-.testimonials{display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:16px; margin-top:12px}
-.testimonial{background:var(--card); padding:14px; border-radius:12px; color:var(--muted); box-shadow:0 6px 18px rgba(2,6,23,0.35)}
-.stars{color:#ffd166}
-
-/* Joke spinner */
-.joke-card{display:flex; gap:12px; align-items:center; justify-content:space-between; padding:12px; border-radius:12px; background:var(--glass);}
-
-/* ------------------------------
-   Chatbot UI
-   ------------------------------ */
-.chat {
-  display:flex; flex-direction:column; gap:12px; background:linear-gradient(180deg,var(--card), rgba(0,0,0,0.02));
-  padding:16px; border-radius:16px;
-}
-.chat__window{height:320px; overflow:auto; padding:12px; border-radius:12px; background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);}
-.msg{display:flex; gap:10px; margin-bottom:12px; align-items:flex-end}
-.msg.bot{justify-content:flex-start}
-.msg.user{justify-content:flex-end}
-.msg .bubble{max-width:72%; padding:10px 12px; border-radius:12px; background:var(--glass-2); color:var(--muted); font-size:14px}
-.msg.user .bubble{background:linear-gradient(90deg, var(--accent), #ffd166); color:#081127}
-
-/* input row */
-.input-row{display:flex; gap:8px; align-items:center}
-.input-row input{flex:1; padding:12px 14px; border-radius:12px; border:0; background:var(--card); color:var(--muted)}
-.voice-btn, .send-btn, .img-btn{padding:10px 12px;border-radius:10px;border:0;background:var(--accent);color:#061319; cursor:pointer; font-weight:700}
-
-/* ------------------------------
-   Map, form, support, footer
-   ------------------------------ */
-.map-frame{width:100%; height:320px; border-radius:12px; border:0}
-.contact-form{display:grid; gap:10px}
-.input, textarea{padding:12px; border-radius:10px; border:0; background:var(--card); color:var(--muted)}
-.textarea{min-height:120px; resize:vertical}
-.support-card{padding:12px; border-radius:12px; background:var(--glass); display:flex; gap:12px; align-items:center; justify-content:space-between;}
-
-/* footer */
-.site-footer{margin-top:24px; padding:18px; border-radius:12px; background:transparent; display:flex; gap:12px; align-items:center; justify-content:space-between; flex-wrap:wrap;}
-.socials{display:flex; gap:10px; align-items:center}
-.icon{width:40px; height:40px; border-radius:10px; display:grid; place-items:center; background:var(--glass)}
-
-/* ------------------------------
-   Responsive tweaks
-   ------------------------------ */
-@media (max-width:720px){
-  .hero{height:78vh; min-height:520px}
-  .topbar{padding:10px}
-  .hero__overlay{padding:14px}
-  .wrap{padding:12px}
-  .chat__window{height:260px}
-}
+    body { margin:0; font-family:sans-serif; background:#0b1020; color:#9aa4bf;}
+.wrap { max-width:1100px; margin:auto; padding:24px;}
+    h1, h2 { color:#fff;}
+.cta { background:#ff6b6b; color:#fff; padding:12px 20px; border:none; border-radius:999px; cursor:pointer;}
+.table { width:100%; border-collapse:collapse; margin-top:12px;}
+.table th,.table td { padding:12px; text-align:left; color:#9aa4bf;}
+.product-img { width:84px; height:64px; object-fit:cover; border-radius:10px;}
+.chat { background:#0f1724; padding:16px; border-radius:16px; margin-top:24px;}
+.msg { margin-bottom:12px;}
+.bubble { background:#1a2332; padding:10px; border-radius:12px; display:inline-block; max-width:70%;}
+.input-row { display:flex; gap:8px; margin-top:12px;}
+.input-row input { flex:1; padding:12px; border-radius:10px; border:none; background:#1a2332; color:#fff;}
+.send-btn { background:#ffd166; color:#000; padding:10px 16px; border:none; border-radius:10px; cursor:pointer;}
   </style>
 </head>
 <body>
+<div class="wrap">
+  <h1>Or Noir — Boutique ya Digital Dropshipping</h1>
+  <p>Ibicuruzwa byatoranijwe, amafoto y'umwuga, support yihuse, na chatbot ikoresha ubwenge</p>
 
-  <!-- Topbar: brand, theme toggle, quick contact -->
-  <header class="topbar wrap" aria-label="Topbar">
-    <a class="brand" href="#hero">
-      <div class="logo" aria-hidden="true">ON</div>
-      <div>
-        <div style="font-weight:800;color:var(--accent)">Or Noir</div>
-        <div style="font-size:12px;color:var(--muted)">Digital Dropshipping Media Boutique</div>
-      </div>
-    </a>
+  <input id="searchInput" placeholder="Shakisha igicuruzwa..." style="width:100%;padding:12px;border-radius:10px;margin:12px 0;background:#1a2332;color:#fff;border:none" />
 
-    <div class="controls">
-      <button class="icon-btn" id="whatsapp-quick" title="Support WhatsApp">💬 WhatsApp</button>
-      <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" title="Toggle Dark/Light">🌗 Toggle theme</div>
+  <h2>Stock yacu</h2>
+  <table class="table">
+    <thead><tr><th>Image</th><th>Igicuruzwa</th><th>Igiciro</th></tr></thead>
+    <tbody id="productTable"></tbody>
+  </table>
+
+  <h2>Chatbot yacu</h2>
+  <div class="chat">
+    <div id="chatWindow"></div>
+    <div class="input-row">
+      <button id="voiceBtn">🎤</button>
+      <input id="chatInput" placeholder="Andika cyangwa uvuge..." />
+      <button id="imgGenBtn">🖼️</button>
+      <button class="send-btn" id="sendBtn">Ohereza</button>
     </div>
-  </header>
-
-  <!-- HERO SECTION
-       - Full-screen video background with fallback image
-       - Audio snippet that speaks to customers in French on load (muted controls optional)
-       - Title, subtitle, CTA
-       -->
-  <main id="hero" class="hero" aria-label="Hero section">
-    <!-- video background; fallback image if video cannot play -->
-    <video class="hero__bg" id="bgVideo" autoplay muted loop playsinline crossorigin="anonymous" poster="">
-      <source src="https://cdn.coverr.co/videos/coverr-slow-motion-bottles-1681?token=eyJhbGciOi..." type="video/mp4">
-      <!-- If video unavailable, we'll show a CSS background fallback -->
-    </video>
-    <div class="hero__fallback" id="bgFallback" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f?q=80&w=1400&auto=format&fit=crop&ixlib=rb-4.0.3&s=example');"></div>
-
-    <div class="hero__overlay wrap">
-      <h1>Or Noir — Boutique ya Digital Dropshipping</h1>
-      <p>Ibicuruzwa byatoranijwe, amafoto y'umwuga, support yihuse, na chatbot ikoresha ubwenge</p>
-
-      <div style="display:flex;align-items:center;gap:12px;justify-content:center">
-        <button class="cta" id="investBtn">Dushorere kugiciro gito</button>
-        <button class="icon-btn" id="previewProducts" title="Reba ibicuruzwa">🛍️ Reba stock</button>
-      </div>
-
-      <div class="muted-note">Icyitonderwa: amajwi y'ikaze araboneka mu Gifarança igihe ufashe urupapuro.</div>
-    </div>
-  </main>
-
-  <div class="wrap">
-
-    <!-- STOCK SECTION
-         - Table with image, description, price
-         - Each row animates into view
-    -->
-    <section id="stock" class="section" aria-label="Stock section">
-      <h2 style="color:#fff">Stock yacu</h2>
-      <div class="section__inner">
-        <!-- Table: image | description | price -->
-        <table class="table" aria-describedby="stock">
-          <thead>
-            <tr><th>Image</th><th>Igicuruzwa</th><th>Igiciro</th></tr>
-          </thead>
-          <tbody id="productTable">
-            <!-- JS will populate with animated rows -->
-          </tbody>
-        </table>
-      </div>
-    </section>
-
-    <!-- FEEDBACK SECTION
-         - Testimonials, rating stars, emojis
-    -->
-    <section id="feedback" class="section" aria-label="Feedback section">
-      <h2 style="color:#fff">Ibitekerezo by'abakiriya</h2>
-      <div class="testimonials" id="testimonials">
-        <!-- testimonials inserted by JS -->
-      </div>
-    </section>
-
-    <!-- DAILY JOKE SPINNER
-         - Shows a joke in Kirundi, stores viewed jokes in localStorage to avoid repeats
-    -->
-    <section id="jokes" class="section" aria-label="Daily joke spinner">
-      <h2 style="color:#fff">Joke ya Uno: Muri Kirundi</h2>
-      <div class="joke-card">
-        <div id="jokeText" style="flex:1">Gutura gato... Joke yacu irahari.</div>
-        <div style="display:flex;gap:8px">
-          <button class="icon-btn" id="newJoke">🎲 Ukwishura</button>
-          <button class="icon-btn" id="readJoke">🔊 Suma</button>
-        </div>
-      </div>
-    </section>
-
-    <hr style="border:none;height:1px;background:rgba(255,255,255,0.04);margin:28px 0">
-
-    <!-- CHATBOT SECTION
-         - Input field with voice recognition and send
-         - Integrates Puter.js hooks (assumed available) to:
-           * query LLMs (GPT-4o, Claude, Gemini) via Puter.js
-           * generate images via puter.ai.txt2img
-         - Uses Web Speech API: recognition & synthesis (Kinyarwanda for TTS, French greeting audio)
-    -->
-    <section id="chatbot" class="section" aria-label="Chatbot section">
-      <h2 style="color:#fff">Chatbot yacu (Ujye ubaza, ivuge, igufotore)</h2>
-      <div class="chat">
-        <div id="chatWindow" class="chat__window" aria-live="polite" role="log">
-          <!-- messages appended here -->
-        </div>
-
-        <div class="input-row">
-          <button class="voice-btn" id="voiceBtn" title="Tangira kuvuga">🎤</button>
-          <input id="chatInput" placeholder="Andika cyangwa kanda 🎤 uvuge..." autocomplete="off" />
-          <button class="img-btn" id="imgGenBtn" title="Ongeraho ifoto">🖼️</button>
-          <button class="send-btn" id="sendBtn">Ohereza</button>
-        </div>
-      </div>
-      <div style="margin-top:12px; color:var(--muted)">Chatbot ivuga mu Kinyarwanda, ariko ijwi ry'ikaze ni mu Gifarança.</div>
-    </section>
-
-    <!-- GOOGLE MAPS EMBED
-         - Location: Gihosha Gisandema
-         - Coordinates provided
-    -->
-    <section id="location" class="section" aria-label="Location">
-      <h2 style="color:#fff">Aho turi</h2>
-      <div>
-        <!-- Google Maps embed using coordinates -->
-        <iframe class="map-frame" loading="lazy" title="Gihosha Gisandema"
-          src="https://www.google.com/maps?q=-3.36392,29.378&z=15&output=embed"></iframe>
-      </div>
-    </section>
-
-    <!-- CONTACT FORM (FormSubmit.io) -->
-    <section id="contact" class="section" aria-label="Contact">
-      <h2 style="color:#fff">Twandikire</h2>
-      <form class="section__inner contact-form" id="contactForm" action="https://formsubmit.co/your@email.com" method="POST">
-        <!-- Replace the action email with your FormSubmit target before publishing -->
-        <input class="input" type="text" name="name" placeholder="Izina" required />
-        <input class="input" type="email" name="email" placeholder="Email" required />
-        <textarea class="textarea" name="message" placeholder="Ubutumwa" required></textarea>
-        <input type="hidden" name="_subject" value="Ubutumwa bushya - Or Noir" />
-        <button class="cta" type="submit">Ohereza ubutumwa</button>
-      </form>
-    </section>
-
-    <!-- WHATSAPP SUPPORT -->
-    <section id="support" class="section" aria-label="Support">
-      <h2 style="color:#fff">Support ya WhatsApp</h2>
-      <div class="support-card">
-        <div>
-          <div style="font-weight:700;color:var(--accent)">Support ya Maintenance</div>
-          <div style="font-size:13px;color:var(--muted)">Duhuye buri munsi 08:00 - 20:00</div>
-        </div>
-        <div style="display:flex;gap:8px;align-items:center">
-          <a id="waLink" class="cta" href="#" target="_blank" rel="noopener">Twandikire kuri WhatsApp</a>
-        </div>
-      </div>
-    </section>
-
-    <!-- FOOTER -->
-    <footer class="site-footer">
-      <div>
-        <div style="font-weight:800;color:var(--accent)">Or Noir</div>
-        <div style="font-size:13px;color:var(--muted)">📞 +25771633859 | 📧 ornoirbruce5@gmail.com | 📍 Gihosha Gisandema</div>
-      </div>
-
-      <div class="socials">
-        <a class="icon" href="#" aria-label="WhatsApp">💬</a>
-        <a class="icon" href="#" aria-label="Instagram">📸</a>
-        <a class="icon" href="#" aria-label="Facebook">📘</a>
-        <!-- QR Code of the site using Google Chart API -->
-        <div style="display:flex;flex-direction:column;align-items:center">
-          <img alt="QR code" src="whatsapp-qr.jpg" style="border-radius:8px" />
-          <div style="font-size:12px;color:var(--muted)">Scan site</div>
-        </div>
-      </div>
-    </footer>
   </div>
 
-  <!-- ------------------------------------
-       Scripts
-       - Handles: theme, products, testimonials animation
-       - Chatbot: Puter.js integration stubs + Web Speech API
-       - Image generation via puter.ai.txt2img stub
-       - Daily jokes storage in localStorage
-       ------------------------------------ -->
-  <script>
-    /* ============================
-       Comments: Global helpers
-       - All major sections are labelled above with comments
-       - This script provides functionality described in the landing page spec
-       ============================ */
+  <h2>Joke ya Uno (Kirundi)</h2>
+  <div style="background:#1a2332;padding:12px;border-radius:12px;margin-bottom:24px">
+    <div id="jokeText">Gutura gato... Joke yacu irahari.</div>
+    <div style="margin-top:8px;display:flex;gap:10px">
+      <button id="newJoke">🎲 Ukwishura</button>
+      <button id="readJoke">🔊 Suma</button>
+    </div>
+  </div>
 
-    // ---------- Theme toggle ----------
-    const themeToggle = document.getElementById('themeToggle');
-    const root = document.documentElement;
-    const currentTheme = localStorage.getItem('theme') || 'dark';
-    if (currentTheme === 'light') document.documentElement.setAttribute('data-theme','light');
-    themeToggle.addEventListener('click', () => {
-      const t = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
-      document.documentElement.setAttribute('data-theme', t === 'light' ? 'light' : '');
-      localStorage.setItem('theme', t === 'light' ? 'light' : 'dark');
-    });
+  <h2>Aho turi</h2>
+  <iframe style="width:100%;height:320px;border-radius:12px;border:none"
+    src="https://www.google.com/maps?q=-3.36392,29.378&z=15&output=embed" loading="lazy" title="Gihosha Gisandema"></iframe>
 
-    // ---------- Background audio greeting in French ----------
-    // Short French greeting audio synthesized using SpeechSynthesis
-    function frenchGreeting(){
-      const s = new SpeechSynthesisUtterance("Bienvenue chez Or Noir, bienvenue ! Nous sommes heureux de vous aider.");
-      s.lang = 'fr-FR';
-      s.volume = 0.9;
-      s.rate = 0.95;
-      // Play once after a mild delay so it's not intrusive
-      setTimeout(()=>{ try { speechSynthesis.speak(s); } catch(e){} }, 800);
-    }
-    // only speak if user previously interacted to avoid autoplay issues; call on first click
-    let greeted = false;
-    document.addEventListener('click', function initGreeting(){
-      if (!greeted){ frenchGreeting(); greeted = true; }
-      document.removeEventListener('click', initGreeting);
-    });
+  <h2>Twandikire</h2>
+  <form action="https://formsubmit.co/your@email.com" method="POST" style="display:grid;gap:10px;margin-top:12px">
+    <input type="text" name="name" placeholder="Izina" required style="padding:12px;border-radius:10px;border:none;background:#1a2332;color:#fff" />
+    <input type="email" name="email" placeholder="Email" required style="padding:12px;border-radius:10px;border:none;background:#1a2332;color:#fff" />
+    <textarea name="message" placeholder="Ubutumwa" required style="padding:12px;border-radius:10px;border:none;background:#1a2332;color:#fff;min-height:120px"></textarea>
+    <input type="hidden" name="_subject" value="Ubutumwa bushya - Or Noir" />
+    <button class="cta" type="submit">Ohereza ubutumwa</button>
+  </form>
 
-    // ---------- Products (Stock) population & animated entry ----------
-    const products = [
-      {id:1, img:'https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=400&auto=format&fit=crop', title:'Umufuka wa Elegance', desc:'Umufuka w\'uruhu rwiza, style ya modern', price:'$24.99'},
-      {id:2, img:'https://images.unsplash.com/photo-1526178611295-3f8d9b9b9bfa?q=80&w=400&auto=format&fit=crop', title:'Amashati y\'ubwiza', desc:'Amashati atandukanye, ibara ryose', price:'$14.50'},
-      {id:3, img:'https://images.unsplash.com/photo-1536305030016-8b1f3f6fb1ff?q=80&w=400&auto=format&fit=crop', title:'Earbuds Pro', desc:'Ama-earbuds y\'ijwi ryiza, battery 24h', price:'$39.99'},
-      {id:4, img:'https://images.unsplash.com/photo-1580913421639-72f3b690a7b8?q=80&w=400&auto=format&fit=crop', title:'Watch Minimal', desc:'Isaha ya moderne, silicone strap', price:'$49.00'}
-    ];
+  <h2>Support ya WhatsApp</h2>
+  <div style="background:#1a2332;padding:12px;border-radius:12px;margin-top:12px;display:flex;justify-content:space-between;align-items:center">
+    <div>
+[09/10, 12:25] Microsoft Copilot: <div style="font-weight:700;color:#ffd166">Support ya Maintenance</div>
+      <div style="font-size:13px;color:#9aa4bf">Duhuye buri munsi 08:00 - 20:00</div>
+    </div>
+    <a id="waLink" class="cta" href="#" target="_blank">Twandikire kuri WhatsApp</a>
+  </div>
 
-    const productTable = document.getElementById('productTable');
-    products.forEach((p, i) => {
-      const tr = document.createElement('tr');
-      tr.className = 'animated-item';
-      tr.innerHTML = `<td><img class="product-img" src="${p.img}" alt="${p.title}"/></td><td><strong style="color:var(--accent)">${p.title}</strong><div style="font-size:13px;color:var(--muted)">${p.desc}</div></td><td style="font-weight:700;color:var(--accent)">${p.price}</td>`;
-      productTable.appendChild(tr);
+  <footer style="margin-top:24px;padding:18px;border-radius:12px;background:#0f1724;display:flex;justify-content:space-between;flex-wrap:wrap;color:#9aa4bf">
+    <div>
+      <strong style="color:#ffd166">Or Noir</strong><br />
+      📞 +25771633859 | 📧 ornoirbruce5@gmail.com | 📍 Gihosha Gisandema
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <a href="#" title="WhatsApp">💬</a>
+      <a href="#" title="Instagram">📸</a>
+      <a href="#" title="Facebook">📘</a>
+    </div>
+  </footer>
+</div>
 
-      // staggered reveal
-      setTimeout(()=>{ tr.style.opacity=1; tr.style.transform='translateY(0)'; }, 180*i);
-    });
+<script type="application/json" id="productData">
+[
+  {"izina":"Umuceri w’Abahinde 5kg","igiciro":"12,500 RWF","ifoto":"https://images.unsplash.com/photo-1542291026-7eec264c27ff","ibisobanuro":"Umuceri mwiza woroshye guteka."},
+  {"izina":"Savon ya Omo 1kg","igiciro":"3,200 RWF","ifoto":"https://images.unsplash.com/photo-1526178611295-3f8d9b9b9bfa","ibisobanuro":"Savon ikuraho umwanda wose."},
+  {"izina":"Earbuds Pro","igiciro":"39,000 RWF","ifoto":"https://images.unsplash.com/photo-1536305030016-8b1f3f6fb1ff","ibisobanuro":"Ama-earbuds y'ijwi ryiza."}
+]
+</script>
 
-    // ---------- Testimonials population ----------
-    const testimonials = [
-      {name:'Aline', text:'Serivisi nziza cyane! Ibyo nashatse babibonye vuba.', rating:5, emoji:'😍'},
-      {name:'Jean', text:'Amafoto yabo yakoze itandukaniro ku bicuruzwa byanjye.', rating:4, emoji:'👍'},
-      {name:'Monique', text:'Support yabafashije neza cyane.', rating:5, emoji:'🎉'}
-    ];
-    const testWrap = document.getElementById('testimonials');
-    testimonials.forEach(t=>{
-      const el = document.createElement('div');
-      el.className='testimonial';
-      el.innerHTML = `<div style="font-weight:700;color:var(--accent)">${t.name} <span class="stars">${'★'.repeat(t.rating)}</span></div><div style="margin-top:8px">${t.text} <span style="font-size:18px">${t.emoji}</span></div>`;
-      testWrap.appendChild(el);
-    });
+<script>
+// Product display + search
+const productData = JSON.parse(document.getElementById('productData').textContent);
+const productTable = document.getElementById('productTable');
+const searchInput = document.getElementById('searchInput');
+function showProducts(list) {
+  productTable.innerHTML = '';
+  list.forEach(p => {
+    const row = document.createElement('tr');
+    row.innerHTML = `<td><img class="product-img" src="${p.ifoto}" alt="${p.izina}" /></td>
+      <td><strong style="color:#ffd166">${p.izina}</strong><div style="font-size:13px;color:#9aa4bf">${p.ibisobanuro}</div></td>
+      <td style="font-weight:700;color:#ff6b6b">${p.igiciro}</td>`;
+    productTable.appendChild(row);
+});
+}
+showProducts(productData);
+searchInput.addEventListener('input', () => {
+  const query = searchInput.value.toLowerCase();
+  const filtered = productData.filter(p =>
+    p.izina.toLowerCase().includes(query) ||
+    p.ibisobanuro.toLowerCase().includes(query)
+);
+  showProducts(filtered);
+});
 
-    // ---------- Daily Joke Spinner (Kirundi) ----------
-    const jokes = [
-      "Umuntu yabajije akazi: 'Ese nta kazi kuboneka?' Nuko umukozi ati: 'Yego, ariko ntacyo wabyuka kuzica.'",
-      "Umwana yibajije ati: 'Dore inyoni igira ibiruka iki?' Umusubiza ati: 'Ibiruka kuko idafite moto.'",
-      "Umugabo yaguriye umugore impano, aramubwira ati: 'Ndagukunda kugeza ku mpera y'isi.' Umugore ati: 'None se wategereje ko isi irangira?'"
-    ];
-    const jokeText = document.getElementById('jokeText');
-    const newJokeBtn = document.getElementById('newJoke');
-    const readJokeBtn = document.getElementById('readJoke');
+//
+  
+// Chatbot logic (continuation)
+function emojiFromText(text){
+  const lower = text.toLowerCase();
+  if (lower.includes('nziza') || lower.includes('thank')) return ['🎉','❤️'];
+  if (lower.includes('nta') || lower.includes('kubura')) return ['😕'];
+  if (lower.includes('byiza') || lower.includes('gusa')) return ['👍'];
+  return ['🙂'];
+}
 
-    // ensure we cycle without repeats using localStorage
-    const usedKey = 'ornoir_used_jokes';
-    function getUsed(){ try { return JSON.parse(localStorage.getItem(usedKey) || '[]'); } catch(e){ return []; } }
-    function markUsed(idx){
-      const u = getUsed(); u.push(idx); localStorage.setItem(usedKey, JSON.stringify(u));
-    }
+function speakKinyarwanda(text){
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'rw-RW'; u.rate = 0.98; u.pitch = 1.0; u.volume = 1.0;
+  speechSynthesis.cancel(); speechSynthesis.speak(u);
+}
 
-    function pickJoke(){
-      const used = getUsed();
-      const available = jokes.map((j,i)=>i).filter(i=>!used.includes(i));
-      let idx;
-      if (available.length === 0){ localStorage.removeItem(usedKey); idx = Math.floor(Math.random()*jokes.length); } else { idx = available[Math.floor(Math.random()*available.length)]; }
-      jokeText.textContent = jokes[idx];
-      markUsed(idx);
-    }
-    newJokeBtn.addEventListener('click', pickJoke);
-    readJokeBtn.addEventListener('click', ()=>{
-      const s = new SpeechSynthesisUtterance(jokeText.textContent);
-      s.lang = 'rn-RW' // Kinyarwanda/Kirundi locale; browser may fallback
-      s.rate = 1;
-      speechSynthesis.speak(s);
-    });
-    // initial joke
-    pickJoke();
+const chatWindow = document.getElementById('chatWindow');
+const chatInput = document.getElementById('chatInput');
+const sendBtn = document.getElementById('sendBtn');
+const voiceBtn = document.getElementById('voiceBtn');
+const imgGenBtn = document.getElementById('imgGenBtn');
 
-    // ---------- WhatsApp autoresponder link & quick action ----------
-    const phone = '+25771633859';
-    const waLink = document.getElementById('waLink');
-    const waQuick = document.getElementById('whatsapp-quick');
-    function whatsappHref(msg){
-      return `https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent(msg)}`;
-    }
-    waLink.href = whatsappHref('Mwaramutse, nifuzaga kumenya byinshi kuri Or Noir.');
-    waQuick.addEventListener('click', ()=> window.open(whatsappHref('Muraho, nshaka support ya Or Noir.'),'_blank'));
+function appendMessage(who, text, meta = {}) {
+  const wrap = document.createElement('div');
+  wrap.className = 'msg';
+  const bubble = document.createElement('div');
+  bubble.className = 'bubble';
+  bubble.innerHTML = text;
+  if (meta.emojis) bubble.innerHTML += ' <span>' + meta.emojis.join(' ') + '</span>';
+  wrap.appendChild(bubble);
+  chatWindow.appendChild(wrap);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+}
 
-    // ---------- Chatbot: Puter.js integration stubs + Web Speech API ----------
-    // NOTE: This implementation uses hypothetical Puter.js hooks. Replace with real Puter.js integration as needed.
-    // Chat behavior:
-    const chatWindow = document.getElementById('chatWindow');
-    const chatInput = document.getElementById('chatInput');
-    const sendBtn = document.getElementById('sendBtn');
-    const voiceBtn = document.getElementById('voiceBtn');
-    const imgGenBtn = document.getElementById('imgGenBtn');
+async function sendMessage() {
+  const text = chatInput.value.trim();
+  if (!text) return;
+  appendMessage('user', text);
+  chatInput.value = '';
+  appendMessage('bot', '...');
+  const match = productData.find(p => text.toLowerCase().includes(p.izina.toLowerCase()));
+  let reply = match
+? `Yego, dufite ${match.izina} ku giciro cya ${match.igiciro}.`
+: `Murakoze kubaza: "${text}". Turacyashakisha igisubizo kijyanye.`;
+  const emojis = emojiFromText(reply);
+  setTimeout(()=>{
+    const last = chatWindow.querySelector('.msg:last-child');
+    if (last) last.remove();
+    appendMessage('bot', reply, {emojis});
+    speakKinyarwanda(reply);
+}, 1000);
+}
 
-    // append message utility
-    function appendMessage(who, text, meta = {}) {
-      const wrap = document.createElement('div');
-      wrap.className = 'msg ' + (who==='bot' ? 'bot' : 'user');
-      const bubble = document.createElement('div');
-      bubble.className = 'bubble';
-      bubble.innerHTML = text;
-      if (who === 'bot' && meta.emojis) bubble.innerHTML += ' <span>' + meta.emojis.join(' ') + '</span>';
-      wrap.appendChild(bubble);
-      chatWindow.appendChild(wrap);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    }
+sendBtn.addEventListener('click', sendMessage);
+chatInput.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') sendMessage();});
 
-    // simple emoji mapper
-    function emojiFromText(text){
-      const lower = text.toLowerCase();
-      if (lower.includes('nziza') || lower.includes('wishimiye') || lower.includes('thank')) return ['🎉','❤️'];
-      if (lower.includes('kubora') || lower.includes('nta')) return ['😕'];
-      if (lower.includes('gusa') || lower.includes('byiza')) return ['👍'];
-      return ['🙂'];
-    }
+imgGenBtn.addEventListener('click', ()=>{
+  const prompt = chatInput.value.trim() || 'Digital product aesthetic';
+  appendMessage('user', `Gusaba ifoto: ${prompt}`);
+  appendMessage('bot', 'Ndimo gukora ifoto...');
+  setTimeout(()=>{
+    const last = chatWindow.querySelector('.msg:last-child');
+    if (last) last.remove();
+    appendMessage('bot', `Ifoto yakozwe`, {emojis: ['🖼️']});
+    const imgWrap = document.createElement('div');
+    imgWrap.className = 'msg';
+    const inner = document.createElement('div');
+    inner.className = 'bubble';
+    inner.innerHTML = `<img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop" style="width:220px;border-radius:10px;" />`;
+    imgWrap.appendChild(inner);
+    chatWindow.appendChild(imgWrap);
+    chatWindow.scrollTop = chatWindow.scrollHeight;
+}, 1200);
+});
 
-    // TTS in Kinyarwanda for chatbot replies
-    function speakKinyarwanda(text){
-      const u = new SpeechSynthesisUtterance(text);
-      u.lang = 'rw-RW'; // Kinyarwanda locale; browser may fallback to closest voice
-      u.rate = 0.98; u.pitch = 1.0; u.volume = 1.0;
-      speechSynthesis.cancel();
-      speechSynthesis.speak(u);
-    }
+// Joke spinner
+const jokes = [
+  "Umuntu yabajije akazi: 'Ese nta kazi kuboneka?' Nuko umukozi ati: 'Yego, ariko ntacyo wabyuka kuzica.'",
+  "Umwana yibajije ati: 'Dore inyoni igira ibiruka iki?' Umusubiza ati: 'Ibiruka kuko idafite moto.'",
+  "Umugabo yaguriye umugore impano, aramubwira ati: 'Ndagukunda kugeza ku mpera y'isi.' Umugore ati: 'None se wategereje ko isi irangira?'"
+];
+const jokeText = document.getElementById('jokeText');
+const newJokeBtn = document.getElementById('newJoke');
+const readJokeBtn = document.getElementById('readJoke');
+function pickJoke(){
+  const idx = Math.floor(Math.random()*jokes.length);
+  jokeText.textContent = jokes[idx];
+}
+newJokeBtn.addEventListener('click', pickJoke);
+readJokeBtn.addEventListener('click', ()=>{
+  const s = new SpeechSynthesisUtterance(jokeText.textContent);
+  s.lang = 'rn-RW'; s.rate = 1;
+  speechSynthesis.speak(s);
+});
+pickJoke();
 
-    // Voice recognition
-    let recognizing = false;
-    let recognition;
-    try {
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      recognition = new SpeechRecognition();
-      recognition.lang = 'rw-RW'; recognition.interimResults = false; recognition.maxAlternatives = 1;
-      recognition.addEventListener('result', (e)=>{
-        const text = e.results[0][0].transcript;
-        chatInput.value = text;
-        sendMessage();
-      });
-      recognition.addEventListener('end', ()=>{ recognizing = false; voiceBtn.textContent='🎤'; });
-    } catch(e){
-      recognition = null;
-      voiceBtn.style.opacity = .6;
-      voiceBtn.title = 'Voice not supported';
-    }
+// WhatsApp link
+const phone = '+25771633859';document.getElementById('waLink').href = `https://wa.me/${phone.replace(/\D/g,'')}?text=${encodeURIComponent('Muraho, nifuzaga support ya Or Noir.')}`;
 
-    voiceBtn.addEventListener('click', ()=>{
-      if (!recognition) return;
-      if (!recognizing){ recognizing = true; recognition.start(); voiceBtn.textContent='🛑'; }
-      else { recognition.stop(); recognizing = false; voiceBtn.textContent='🎤'; }
-    });
-
-    // Toy: call Puter.js style function to process user prompts and optionally generate images
-    // These are stubs showing where to integrate the real Puter.js SDK.
-    async function callPuterChat(prompt, opts = {}) {
-      // Staged simulated async reply to show interactivity.
-      return new Promise((resolve) => {
-        setTimeout(()=>{
-          const reply = `Murakoze kubaza: "${prompt}". Dore igisubizo gitangwa na Or Noir.`;
-          const emojis = emojiFromText(prompt);
-          resolve({text: reply, emojis, images: []});
-        }, 900 + Math.random()*900);
-      });
-    }
-
-    async function callPuterImage(prompt) {
-      // Simulate puter.ai.txt2img call; replace with real integration
-      return new Promise((resolve)=>{
-        setTimeout(()=>{
-          // placeholder image from Unsplash with prompt encoded for demo
-          const url = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=800&auto=format&fit=crop';
-          resolve(url);
-        }, 1200);
-      });
-    }
-
-    // main send flow
-    async function sendMessage() {
-      const text = chatInput.value.trim();
-      if (!text) return;
-      appendMessage('user', text);
-      chatInput.value = '';
-      // show typing indicator
-      appendMessage('bot', '...'); // placeholder
-      // call Puter chat (simulated)
-      const res = await callPuterChat(text, {models:['gpt-4o','claude','gemini']});
-      // remove last typing placeholder
-      const last = chatWindow.querySelector('.msg.bot:last-child .bubble');
-      if (last) last.parentElement.remove();
-      appendMessage('bot', res.text, {emojis:res.emojis});
-      // speak in Kinyarwanda
-      speakKinyarwanda(res.text);
-    }
-
-    sendBtn.addEventListener('click', sendMessage);
-    chatInput.addEventListener('keydown', (e)=>{ if (e.key === 'Enter') sendMessage(); });
-
-    // Image generation flow
-    imgGenBtn.addEventListener('click', async ()=>{
-      const prompt = chatInput.value.trim() || 'Digital dropshipping product, clean aesthetic, studio lighting';
-      appendMessage('user', `Gusaba ifoto: ${prompt}`);
-      appendMessage('bot', 'Ndimo gukora ifoto...'); // placeholder
-      const imgUrl = await callPuterImage(prompt);
-      // replace placeholder
-      const last = chatWindow.querySelector('.msg.bot:last-child .bubble');
-      if (last) last.parentElement.remove();
-      appendMessage('bot', `Ifoto yakozwe`, {emojis: ['🖼️']});
-      // show image message
-      const imgWrap = document.createElement('div');
-      imgWrap.className = 'msg bot';
-      const inner = document.createElement('div');
-      inner.className = 'bubble';
-      inner.innerHTML = `<img src="${imgUrl}" alt="Generated" style="width:220px;border-radius:10px;display:block" />`;
-      imgWrap.appendChild(inner);
-      chatWindow.appendChild(imgWrap);
-      chatWindow.scrollTop = chatWindow.scrollHeight;
-    });
-
-    // ---------- Video fallback detection ----------
-    const bgVideo = document.getElementById('bgVideo');
-    const bgFallback = document.getElementById('bgFallback');
-    bgVideo.addEventListener('error', ()=>{ bgVideo.style.display='none'; bgFallback.style.display='block'; });
-    // if video can't play due to autoplay policy, show fallback
-    setTimeout(()=>{ if (bgVideo.readyState === 0) { bgVideo.style.display='none'; bgFallback.style.display='block'; } }, 2200);
-
-    // ---------- Simple animated reveal for sections on scroll ----------
-    const observer = new IntersectionObserver(entries=>{
-      entries.forEach(e=>{
-        if (e.isIntersecting){
-          e.target.style.opacity = 1;
-          e.target.style.transform = 'translateY(0)';
-          observer.unobserve(e.target);
-        }
-      });
-    }, {threshold:0.12});
-    document.querySelectorAll('.animated-item').forEach(el=>{
-      observer.observe(el);
-    });
-
-    // ---------- Accessibility focus for CTA ----------
-    document.getElementById('investBtn').addEventListener('click', ()=> {
-      document.getElementById('contact').scrollIntoView({behavior:'smooth'});
-      // prefills contact subject
-      const nameInput = document.querySelector('#contactForm input[name="name"]');
-      if (nameInput) nameInput.focus();
-    });
-
-    // ---------- Inline note for developer: Puter.js integration ----------
-    /* 
-      SECTION: Puter.js integration notes (developer-use only, keep commented)
-      - Replace callPuterChat and callPuterImage with real Puter.js SDK calls.
-      - Chat flow should send user audio if available, use SpeechRecognition results, and request multimodal outputs.
-      - When hooking to external LLMs, ensure API keys and CORS are configured server-side.
-    */
-
-    // End of script
-  </script>
+// French greeting
+function frenchGreeting(){
+  const s = new SpeechSynthesisUtterance("Bienvenue chez Or Noir, bienvenue! Nous sommes heureux de vous aider.");
+  s.lang = 'fr-FR'; s.volume = 0.9; s.rate = 0.95;
+  setTimeout(()=>{ try { speechSynthesis.speak(s);} catch(e){}}, 800);
+}
+let greeted = false;
+document.addEventListener('click', function initGreeting(){
+  if (!greeted){ frenchGreeting(); greeted = true;}
+  document.removeEventListener('click', initGreeting);
+});
+</script>
 </body>
 </html>
+```
