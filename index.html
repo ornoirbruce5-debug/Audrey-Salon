@@ -225,18 +225,217 @@
            - Puter.js style chatbot logic implemented below
            - supports speech recognition, TTS (Kinyarwanda and Kiswahili), image generation button (placeholder), emoji injection
       -->
-      <section id="chat" class="reveal">
-        <h2>Chatbot y'ubucuruzi</h2>
-        <p class="muted">Vuga cyangwa andika ikibazo; chatbot izasubiza, izavuga mu Kinyarwanda cyangwa Kiswahili, kandi izashushanya amafoto ashingiye ku bisobanuro</p>
+      <!DOCTYPE html>
+<html lang="rw">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pro Dropshipping Page</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+}
 
-        <div class="card" style="display:flex;gap:12px;flex-direction:column">
-          <div class="grid" style="grid-template-columns:1fr 360px">
-            <div style="display:flex;flex-direction:column;gap:8px">
-              <div class="chat-wrapper">
-                <div id="chatWindow" class="chat-window" role="log" aria-live="polite" tabindex="0">
-                  <!-- messages go here -->
-                </div>
+    header {
+      background-color: #27ae60;
+      color: white;
+      padding: 20px;
+      text-align: center;
+}
 
+.main-content {
+      padding: 30px;
+      max-width: 800px;
+      margin: auto;
+}
+
+.card {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+}
+
+.chatbot-section {
+      background: white;
+      padding: 20px;
+      border-radius: 12px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      margin-bottom: 30px;
+}
+
+.chatbot-section h2 {
+      color: #2c3e50;
+      margin-bottom: 10px;
+}
+
+    #chatbox {
+      height: 300px;
+      overflow-y: auto;
+      border: 1px solid #ddd;
+      padding: 10px;
+      background: #fff;
+      border-radius: 8px;
+      margin-bottom: 15px;
+}
+
+.input-row,.action-row {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+}
+
+    #chatInput {
+      flex: 1;
+      padding: 10px;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+}
+
+    button {
+      padding: 10px 14px;
+      border: none;
+      border-radius: 8px;
+      background-color: #27ae60;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s ease;
+}
+
+    button:hover {
+      background-color: #219150;
+}
+
+    select {
+      padding: 8px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+}
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      background: #eee;
+      font-size: 14px;
+}
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Pro Dropshipping Page</h1>
+    <p>Welcome to your smart product assistant</p>
+  </header>
+
+  <div class="main-content">
+
+    <div class="card">
+      <h2>🔍 Quick Product Finder</h2>
+      <p>Niba ushaka kumenya aho wabona ibicuruzwa bitandukanye, andika izina ryabyo hasi:</p>
+      <input type="text" placeholder="Andika izina cyangwa..." style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
+      <button style="margin-top:10px;">Nta bisubizo</button>
+    </div>
+
+    <section class="chatbot-section">
+      <h2>🤖 Chatbot y'Ubwenge bw'Ubukorano</h2>
+      <p>Shyiramo ikibazo, uvuge, cyangwa usabe image/stock:</p>
+
+      <div id="chatbox"></div>
+
+      <div class="input-row">
+        <input type="text" id="chatInput" placeholder="Andika ikibazo..." />
+        <button id="voiceBtn">🔊</button>
+        <button id="sendBtn">Ohereza</button>
+      </div>
+
+      <div class="action-row">
+        <button id="imgGenBtn">🖼️ Generate Image</button>
+        <button id="stockBtn">📦 Reba Stock</button>
+        <select id="lang">
+          <option value="rw-RW">Kinyarwanda</option>
+          <option value="sw">Kiswahili</option>
+          <option value="en-US">English</option>
+        </select>
+      </div>
+    </section>
+
+  </div>
+
+  <footer>
+    &copy; 2025 Pro Dropshipping. All rights reserved.
+  </footer>
+
+  <script src="https://js.puter.com/v2/"></script>
+  <script>
+    const chatbox = document.getElementById("chatbox");
+    const input = document.getElementById("chatInput");
+    const sendBtn = document.getElementById("sendBtn");
+    const voiceBtn = document.getElementById("voiceBtn");
+    const imgGenBtn = document.getElementById("imgGenBtn");
+[10/10, 14:00] Microsoft Copilot: const stockBtn = document.getElementById("stockBtn");
+    const langSelect = document.getElementById("lang");
+
+    function appendMessage(sender, text) {
+      const msg = document.createElement("p");
+      msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
+      chatbox.appendChild(msg);
+      chatbox.scrollTop = chatbox.scrollHeight;
+      puter.db.insert("chat_history", { sender, text});
+}
+
+    sendBtn.onclick = () => {
+      const userMsg = input.value.trim();
+      if (!userMsg) return;
+      appendMessage("Wowe", userMsg);
+      input.value = "";
+      puter.ai.chat(userMsg, { model: "gpt-5-nano"}).then(response => {
+        appendMessage("Chatbot", response);
+}).catch(() => {
+        appendMessage("Chatbot", "Hari ikibazo mu gusubiza.");
+});
+};
+
+    voiceBtn.onclick = () => {
+      const recognition = new webkitSpeechRecognition();
+      recognition.lang = langSelect.value;
+      recognition.onresult = event => {
+        input.value = event.results[0][0].transcript;
+};
+      recognition.start();
+};
+
+    imgGenBtn.onclick = () => {
+      const prompt = input.value.trim();
+      if (!prompt) return alert("Andika icyo ushaka ko gifotorwa.");
+      appendMessage("Wowe", `🖼️ Saba image: ${prompt}`);
+      puter.ai.image(prompt).then(url => {
+        appendMessage("Chatbot", `<img src="${url}" style="max-width:100%;">`);
+}).catch(() => {
+        appendMessage("Chatbot", "Ntibyakunze gukora image.");
+});
+};
+
+    stockBtn.onclick = () => {
+      const query = input.value.trim();
+      if (!query) return alert("Andika izina ry'igicuruzwa.");
+      appendMessage("Wowe", `📦 Saba stock ya: ${query}`);
+      const stock = ["phone", "laptop", "charger", "earbuds"];
+      const found = stock.includes(query.toLowerCase());
+      const response = found? `Igicuruzwa "${query}" kirahari.`: `Igicuruzwa "${query}" ntikiraboneka.`;
+      appendMessage("Chatbot", response);
+};
+  </script>
+
+</body>
+</html>
                 <div class="chat-controls">
                   <input id="chatInput" class="chat-input" placeholder="Andika cyangwa kanda icon y'ijwi..." aria-label="Chat input" />
                   <button id="voiceBtn" class="voice-btn" title="Tangira kuvuga">🎙️</button>
