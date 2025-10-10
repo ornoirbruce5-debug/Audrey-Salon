@@ -1,961 +1,587 @@
 <!doctype html>
-<html lang="rw">
+<html lang="rn">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Boutique Smart — Landing Page</title>
-  <meta name="description" content="Boutique smart: chatbot, stock, jokes, voice, image gen, maps, contact & WhatsApp support." />
+  <meta name="description" content="Boutique intelligent ifite chatbot, voice, image-gen, stock search, na contact." />
 
-  <!-- Basic styles, responsive layout, dark mode toggle, animated reveals -->
+  <!-- Styles: modern responsive + dark mode + animations -->
   <style>
+    /* Basic reset */
     :root{
-      --bg:#0f1724; --card:#0b1220; --muted:#94a3b8; --accent:#06b6d4; --glass: rgba(255,255,255,0.04);
-      --maxw:1100px;
-      --radius:12px;
-      color-scheme: dark;
+      --bg:#0f1724; --card:#0b1220; --muted:#9aa4b2; --accent:#00d1b2; --glass: rgba(255,255,255,0.04);
+      --light-bg:#f4f7fb; --light-card:#ffffff; --text:#e6eef6; --radius:12px;
+      --max-width:1100px;
     }
     [data-theme="light"]{
-      --bg:#f7fafc; --card:#ffffff; --muted:#475569; --accent:#0ea5a4; --glass: rgba(0,0,0,0.04);
-      color-scheme: light;
+      --bg:var(--light-bg); --card:var(--light-card); --muted:#475569; --text:#0b1220; --glass: rgba(0,0,0,0.04);
     }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background:linear-gradient(180deg,#071226 0%, var(--bg) 100%); color:#e6eef6; -webkit-font-smoothing:antialiased;
-      -moz-osx-font-smoothing:grayscale; line-height:1.45; scroll-behavior:smooth;
-    }
-    .container{max-width:var(--maxw); margin:0 auto; padding:20px;}
-    header{position:fixed; left:0; right:0; top:12px; display:flex; align-items:center; justify-content:space-between; padding:8px 20px; z-index:60}
-    .brand{display:flex; gap:12px; align-items:center}
-    .logo{width:48px;height:48px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);display:flex;align-items:center;justify-content:center;font-weight:700}
-    nav{display:flex;gap:12px;align-items:center}
-    a.navlink{color:var(--muted);text-decoration:none;padding:8px;border-radius:8px}
-    a.navlink:focus,a.navlink:hover{color:var(--accent);outline: none; box-shadow:0 0 0 3px rgba(6,182,212,0.12)}
-    .toggle{background:var(--card); padding:6px;border-radius:8px;cursor:pointer;border:1px solid rgba(255,255,255,0.03)}
-    /* full-screen hero with video/fallback */
+
+    html,body{height:100%;margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;}
+    body{background:linear-gradient(180deg,#071026 0%, var(--bg) 100%);color:var(--text);-webkit-font-smoothing:antialiased;line-height:1.45;}
+    .wrap{max-width:var(--max-width);margin:0 auto;padding:24px;}
+
+    /* Fullscreen video background container */
     .hero{
-      min-height:100vh; display:grid; place-items:center; position:relative; overflow:hidden;
-      border-bottom:1px solid rgba(255,255,255,0.03);
+      position:relative;height:78vh;min-height:420px;border-radius:16px;overflow:hidden;display:flex;align-items:center;justify-content:center;
+      background:linear-gradient(180deg, rgba(2,6,23,0.4), rgba(2,6,23,0.6));
+      box-shadow:0 10px 30px rgba(2,6,23,0.6);
     }
-    .bgmedia{position:absolute;inset:0;z-index:0;display:block;object-fit:cover;width:100%;height:100%}
-    .bg-fallback{position:absolute;inset:0;background:url('https://images.unsplash.com/photo-1526178612303-7a7a9b3a3f7a?q=80&w=1600&auto=format&fit=crop') center/cover no-repeat;filter:brightness(.45);z-index:0}
-    .hero-inner{position:relative;z-index:2;text-align:center;padding:48px 16px}
-    .title{font-size:clamp(28px,6vw,48px);margin:6px 0;color:#fff;font-weight:800;letter-spacing:-0.02em}
-    .subtitle{color:var(--muted);font-size:clamp(14px,2.5vw,18px);margin-bottom:18px}
-    .cta{background:linear-gradient(90deg,var(--accent),#7c3aed); border:none;color:#041024;padding:12px 18px;border-radius:12px;font-weight:700;cursor:pointer}
-    .cta:focus{outline:none; box-shadow:0 6px 20px rgba(7,128,161,0.18)}
-    /* layout sections */
-    section{padding:72px 0}
-    .grid{display:grid;gap:20px;grid-template-columns:1fr 420px}
-    @media(max-width:880px){ .grid{grid-template-columns:1fr} header{padding:8px 12px} .container{padding:12px} }
-    /* stock table */
-    .card{background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent); padding:18px; border-radius:var(--radius); box-shadow:0 6px 30px rgba(2,6,23,0.6); border:1px solid rgba(255,255,255,0.03)}
-    .stock-search{display:flex;gap:8px;margin-bottom:12px}
-    .search{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:inherit}
+    .bg-media{position:absolute;inset:0;object-fit:cover;width:100%;height:100%;}
+    .bg-fallback{position:absolute;inset:0;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900"><rect width="100%" height="100%" fill="%230b1220"/><text x="50%" y="50%" fill="%23ffffff" font-size="36" font-family="Arial" text-anchor="middle">Fallback Image</text></svg>');background-size:cover;background-position:center}
+    .hero-content{position:relative;z-index:3;padding:32px;text-align:center;max-width:900px;}
+    h1{font-size:clamp(1.6rem,4vw,3rem);margin:0 0 8px;letter-spacing:-0.02em}
+    p.lead{margin:0 0 18px;color:var(--muted);font-size:1.05rem}
+
+    .cta-row{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+    .btn{
+      background:linear-gradient(90deg,var(--accent),#00b59a);border:0;color:#022;padding:12px 18px;border-radius:10px;cursor:pointer;font-weight:600;
+      box-shadow:0 6px 18px rgba(0,0,0,0.25);transition:transform .16s ease,filter .16s;
+    }
+    .btn:focus{outline:3px solid rgba(0,209,178,0.18)}
+    .btn.secondary{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--text)}
+
+    /* Layout grid for sections */
+    section{margin:28px 0;padding:18px;border-radius:var(--radius);background:linear-gradient(180deg, rgba(255,255,255,0.02), transparent);backdrop-filter: blur(6px);}
+    .grid{display:grid;grid-template-columns:1fr 380px;gap:18px}
+    @media (max-width:900px){.grid{grid-template-columns:1fr}.hero{height:62vh}}
+
+    /* Stock table */
     .stock-table{width:100%;border-collapse:collapse}
-    .stock-table th, .stock-table td{padding:10px;text-align:left;border-bottom:1px dashed rgba(255,255,255,0.03)}
-    .product-img{width:64px;height:64px;border-radius:8px;object-fit:cover}
-    /* testimonials, jokes */
-    .testi{display:flex;flex-direction:column;gap:12px}
-    .testi-item{display:flex;gap:12px;align-items:flex-start}
-    .avatar{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#ffb86b,#ff7ab6);display:inline-flex;align-items:center;justify-content:center;font-weight:700}
-    .rating{color:#ffd166}
-    /* chatbot */
-    .chat-wrapper{display:flex;flex-direction:column;height:520px}
-    .chat-window{flex:1;overflow:auto;padding:14px;border-radius:10px;background:linear-gradient(180deg, rgba(255,255,255,0.01), transparent);border:1px solid rgba(255,255,255,0.02)}
-    .message{display:inline-block;max-width:82%;padding:10px 12px;border-radius:12px;margin:8px 0;line-height:1.3}
-    .user-msg{background:#06384a;color:#dff8ff;border-bottom-left-radius:4px;align-self:flex-end}
-    .bot-msg{background:rgba(255,255,255,0.03);color:var(--muted);border-bottom-right-radius:4px}
-    .chat-controls{display:flex;gap:8px;margin-top:10px}
-    .chat-input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);background:transparent}
-    .voice-btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:10px;border-radius:10px;cursor:pointer}
-    /* map embed */
-    .map{height:260px;border-radius:10px;overflow:hidden}
-    /* footer */
-    footer{padding:28px 0;border-top:1px solid rgba(255,255,255,0.03);margin-top:40px}
-    .socials{display:flex;gap:12px;align-items:center}
-    .qr{width:88px;height:88px;border-radius:8px;background:#071226;display:grid;place-items:center}
-    /* animations */
-    .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.9,.2,1)}
-    .reveal.active{opacity:1;transform:none}
-    .fade-in{animation:fadeIn .9s both}
-    @keyframes fadeIn{from{opacity:0; transform:translateY(12px)} to{opacity:1; transform:none}}
-    /* small helpers */
-    .muted{color:var(--muted)}
-    .flex{display:flex;gap:12px;align-items:center}
-    button:disabled{opacity:.5;cursor:not-allowed}
-    /* accessible focus outlines */
-    :focus{outline: 3px solid rgba(6,182,212,0.12); outline-offset:3px}
+    .stock-table th,.stock-table td{padding:10px;border-bottom:1px dashed rgba(255,255,255,0.03);text-align:left;font-size:0.95rem}
+    .product-row{display:flex;gap:12px;align-items:center}
+    .product-thumb{width:64px;height:64px;border-radius:8px;flex:0 0 64px;object-fit:cover;background:var(--glass);display:inline-block}
+
+    /* Chat UI */
+    .chat{display:flex;flex-direction:column;height:100%;gap:8px}
+    .chat-window{flex:1;overflow:auto;padding:12px;border-radius:12px;background:linear-gradient(180deg, rgba(0,0,0,0.04), transparent)}
+    .msg{max-width:78%;padding:10px 12px;border-radius:12px;margin-bottom:8px;display:inline-block}
+    .msg.user{background:#0ea5a4;color:#042;align-self:flex-end;border-bottom-right-radius:4px}
+    .msg.bot{background:linear-gradient(90deg,#172554,#0b1220);color:var(--text);align-self:flex-start}
+    .chat-input{display:flex;gap:8px;align-items:center}
+    .chat-input input{flex:1;padding:10px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);background:transparent;color:var(--text)}
+    .icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.03);cursor:pointer}
+
+    /* Feedback carousel simple */
+    .testimonials{display:flex;gap:12px;overflow:auto;padding:6px}
+    .testi{min-width:220px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02)}
+
+    /* Joke spinner */
+    .joke-area{text-align:center}
+    .spinner{display:inline-block;padding:18px;border-radius:50%;background:rgba(255,255,255,0.02);cursor:pointer}
+
+    /* Footer */
+    footer{display:flex;flex-direction:column;gap:8px;font-size:0.95rem;color:var(--muted);align-items:center}
+
+    /* Animated reveal */
+    .reveal{opacity:0;transform:translateY(12px);transition:opacity .6s ease,transform .6s ease}
+    .reveal.visible{opacity:1;transform:none}
+
+    /* Smooth scroll */
+    html{scroll-behavior:smooth}
   </style>
 </head>
 <body>
 
-  <!-- Header with brand and simple nav; includes dark mode toggle -->
-  <header>
-    <div class="brand container" style="max-width:none">
-      <div class="logo" aria-hidden="true">B</div>
-      <div>
-        <strong>Boutique Smart</strong><br /><span class="muted" style="font-size:12px">Gihosha Gisandema</span>
-      </div>
-    </div>
-    <nav>
-      <a class="navlink" href="#stock">Stock</a>
-      <a class="navlink" href="#chat">Chatbot</a>
-      <a class="navlink" href="#contact">Contact</a>
-      <button class="toggle" id="themeToggle" title="Toggle dark mode">🌙</button>
-    </nav>
-  </header>
+  <!-- Top audio greeting in French. Plays muted first to respect autoplay policies then un-mutes on user gesture -->
+  <!-- Section comment: Audio greeting to welcome visitors in French -->
+  <audio id="greeting-audio" preload="auto">
+    <source src="" type="audio/mpeg">
+  </audio>
 
-  <!-- HERO SECTION
-       - video background with fallback image
-       - audio greeting in French plays on entry (muted autoplay rules handled)
-       - CTA pre-fills contact subject
-  -->
-  <main>
-    <section class="hero" id="home" aria-label="Hero section">
-      <!-- video background; plays muted by default; fallback image layer in case video fails -->
-      <video class="bgmedia" id="bgVideo" autoplay muted loop playsinline aria-hidden="true">
-        <source src="https://cdn.coverr.co/videos/coverr-fashion-model-1595?token=eyJhbGciOiJI" type="video/mp4">
+  <div class="wrap">
+
+    <!-- Hero Section: video background + fallback image + title + CTA -->
+    <section class="hero" id="hero">
+      <!-- Video background: uses an external mp4 URL placeholder; developer can replace with production asset -->
+      <video class="bg-media" id="bgVideo" autoplay muted loop playsinline crossorigin="anonymous">
+        <source src="https://cdn.coverr.co/videos/coverr-modern-shop-choosing-comes-alive-1592?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9" type="video/mp4">
       </video>
-      <div class="bg-fallback" aria-hidden="true"></div>
+      <div class="bg-fallback" id="fallback"></div>
 
-      <div class="hero-inner container reveal">
-        <h1 class="title">Boutique Smart — Imyenda, Inyongera, Serivisi</h1>
-        <p class="subtitle">Dufasha abakiriya kubona ibicuruzwa byiza, kugura vuba kandi binyuze mu ijwi na chatbot ifite ubushobozi</p>
+      <div class="hero-content">
+        <h1>Bienvenue chez Boutique Smart</h1>
+        <p class="lead">Boutique yacu y'ubwenge: ubucuruzi, service vocal, chatbot mu Kinyarwanda kandi igatanga amafoto ukoresheje ibisobanuro.</p>
 
-        <!-- CTA button; prefill subject in contact form via anchor param -->
-        <div style="display:flex;gap:12px;justify-content:center;align-items:center;margin-top:16px">
-          <a href="#contact?subject=Gushaka%20ibiciro%20bihanitse" class="cta" id="ctaPrimary">Dushorere kugiciro gito</a>
-          <button class="cta" id="openChat" style="background:#0ea5a4;color:#022">Vugana natwe</button>
+        <div class="cta-row" role="navigation" aria-label="Call to actions">
+          <button class="btn" id="cta-preorder" aria-label="Dushorere kugiciro gito">Dushorere kugiciro gito</button>
+          <button class="btn secondary" id="toggle-theme" aria-pressed="false">Dark / Light</button>
         </div>
-        <!-- hidden audio greeting (French) that will be triggered once user interacts or allowed -->
-        <audio id="greetingAudio" preload="auto">
-          <source src="" type="audio/mpeg">
-        </audio>
       </div>
     </section>
 
-    <div class="container">
-      <!-- STOCK SECTION
-           - loads products from embedded JSON
-           - live search
-           - animated entry for items
-      -->
-      <section id="stock" class="reveal" aria-label="Stock section">
-        <h2>Stock y'ibicuruzwa</h2>
-        <p class="muted">Shakisha ibicuruzwa, urebe igiciro, ndetse ubaze chatbot niba bihari</p>
+    <!-- Main grid: Stock + Chat -->
+    <section class="reveal" id="main-section">
+      <div class="grid">
+        <!-- Left column: stock, search, feedback, jokes -->
+        <div>
 
-        <div class="card" style="margin-top:12px">
-          <div style="display:flex;justify-content:space-between;align-items:center">
-            <div class="stock-search" style="width:70%">
-              <input id="searchInput" class="search" placeholder="Shakisha ibicuruzwa..." aria-label="Shakisha ibicuruzwa" />
-              <select id="filterCat" class="search" style="width:160px">
-                <option value="">Icyiciro cyose</option>
-                <option value="imyenda">Imyenda</option>
-                <option value="inkweto">Inkweto</option>
-                <option value="ubwiza">Ubwiza</option>
-              </select>
+          <!-- Stock Section -->
+          <!-- Comment: ibicuruzwa bisomwa muri embedded JSON "stockData" -->
+          <article id="stock" style="margin-bottom:16px;">
+            <h2>Stock y'ibicuruzwa</h2>
+            <label for="search" style="color:var(--muted);font-size:0.95rem">Shakisha ibicuruzwa</label>
+            <input id="search" type="search" placeholder="Andika izina cyangwa igiciro..." style="width:100%;padding:10px;border-radius:10px;margin-top:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)">
+
+            <div style="margin-top:12px;overflow:hidden;border-radius:12px">
+              <table class="stock-table" aria-live="polite" id="stockTable">
+                <thead>
+                  <tr><th>Image</th><th>Izina / Ibisobanuro</th><th>Igiciro</th></tr>
+                </thead>
+                <tbody id="stockBody">
+                  <!-- Rows injected from JS -->
+                </tbody>
+              </table>
             </div>
-            <div class="muted">Ibisigaye: <span id="stockCount">0</span></div>
-          </div>
+          </article>
 
-          <div style="overflow:auto;margin-top:12px">
-            <table class="stock-table" aria-live="polite" id="stockTable">
-              <thead>
-                <tr>
-                  <th>Image</th>
-                  <th>Izina / Ibisobanuro</th>
-                  <th>Igiciro</th>
-                  <th>Ububiko</th>
-                </tr>
-              </thead>
-              <tbody id="stockBody">
-                <!-- Rows inserted by JS from embedded JSON -->
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </section>
-
-      <hr style="border:none;height:24px"/>
-
-      <!-- FEEDBACK SECTION: testimonials with emojis and ratings -->
-      <section id="feedback" class="reveal">
-        <h2>Ibitekerezo by'abakiriya</h2>
-        <div class="card testi" style="margin-top:12px">
-          <div class="testi-item">
-            <div class="avatar">AB</div>
-            <div>
-              <strong>Aline B.</strong> <div class="rating">⭐⭐⭐⭐⭐</div>
-              <div class="muted">Imyenda yanjye yageze vuba kandi ifite ubuziranenge 😊</div>
+          <!-- Feedback Section -->
+          <!-- Comment: testimonials with emojis and stars -->
+          <article id="feedback" style="margin-bottom:16px;">
+            <h2>Amahugurwa y'abakiriya</h2>
+            <div class="testimonials" id="testiList" aria-live="polite">
+              <!-- JS injects testimonials -->
             </div>
-          </div>
-          <div class="testi-item">
-            <div class="avatar">MR</div>
-            <div>
-              <strong>Martin R.</strong> <div class="rating">⭐⭐⭐⭐</div>
-              <div class="muted">Serivisi nziza, ubufasha bwa WhatsApp bwarushijeho gutuma ngura byoroshye 👍</div>
+          </article>
+
+          <!-- Daily Joke Spinner -->
+          <!-- Comment: spinner chooses unique joke daily stored in localStorage -->
+          <article id="jokes" class="joke-area" style="margin-bottom:16px;">
+            <h2>Joke ya buri munsi (mu Kirundi)</h2>
+            <div style="margin:12px 0">
+              <button class="spinner" id="spinJoke" aria-label="Fata joke nshasha">🎲 Spin</button>
             </div>
-          </div>
+            <div id="jokeText" style="min-height:48px;color:var(--muted)"></div>
+            <div style="margin-top:10px">
+              <button class="btn" id="readJoke">Soma Joke mu ijwi</button>
+            </div>
+          </article>
         </div>
-      </section>
 
-      <hr style="border:none;height:24px"/>
+        <!-- Right column: Chatbot + quick info -->
+        <aside style="display:flex;flex-direction:column;gap:12px;align-items:stretch;">
+          <!-- Chatbot Section -->
+          <!-- Comment: Puter.js style logic implemented below in JS -->
+          <article id="chatbot" style="padding:12px;">
+            <h2>Chatbot ya Boutique (Puter.js style)</h2>
+            <div class="chat" aria-live="polite">
+              <div class="chat-window" id="chatWindow" role="log" aria-atomic="false">
+                <!-- Messages injected here -->
+                <div class="msg bot" id="welcomeMsg">Murakaza neza! Mumbaze ibijyanye n'ibicuruzwa.</div>
+              </div>
 
-      <!-- DAILY JOKE SPINNER
-           - jokes in Kirundi rotated daily using local date and stored to avoid repeats
-           - TTS reads joke in Kinyarwanda on button click
-      -->
-      <section id="jokes" class="reveal">
-        <h2>Joke ya buri munsi (Ikirundi)</h2>
-        <div class="card" style="display:flex;gap:12px;flex-direction:column">
-          <div id="jokeText" style="font-size:18px;color:var(--muted)">Gutoranya...</div>
-          <div style="display:flex;gap:8px;align-items:center">
-            <button id="newJoke" class="cta" style="background:#7c3aed">Spin Joke</button>
-            <button id="speakJoke" class="cta" style="background:#06b6d4;color:#022">Soma mu ijwi</button>
-            <div class="muted" style="margin-left:auto">Ububiko: <span id="jokeUsedCount">0</span></div>
-          </div>
-        </div>
-      </section>
+              <div class="chat-input" style="margin-top:8px;">
+                <button class="icon" id="voiceBtn" title="Vuga (voice)">🎙️</button>
+                <input id="chatInput" placeholder="Andika ikibazo cyawe..." aria-label="Chat input" />
+                <button class="icon" id="imgGenBtn" title="Generate Image">🖼️</button>
+                <button class="btn" id="sendBtn" aria-label="Ohereza">Ohereza</button>
+              </div>
+              <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+                <small style="color:var(--muted)">Chatbot izasubiza mu Kinyarwanda, kandi ijwi rya chatbot rirashobora kuba mu Gifaransa cyangwa Kiswahili.</small>
+              </div>
+            </div>
+          </article>
 
-      <hr style="border:none;height:24px"/>
+          <!-- Map Embed / Support -->
+          <article id="mapSupport" style="padding:12px;">
+            <h3>Aho turi</h3>
+            <!-- Google Maps embed using iframe with specified coordinates -->
+            <div style="border-radius:10px;overflow:hidden;margin-bottom:10px">
+              <iframe title="Gihosha Gisandema map" width="100%" height="200" frameborder="0"
+                src="https://www.google.com/maps?q=-3.36392,29.378&z=15&output=embed"></iframe>
+            </div>
 
-      <!-- CHATBOT SECTION
-           - Puter.js style chatbot logic implemented below
-           - supports speech recognition, TTS (Kinyarwanda and Kiswahili), image generation button (placeholder), emoji injection
-      -->
-      <!DOCTYPE html>
-<html lang="rw">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Pro Dropshipping Page</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      font-family: 'Segoe UI', sans-serif;
-      background: #f4f4f4;
-      margin: 0;
-      padding: 0;
-}
-
-    header {
-      background-color: #27ae60;
-      color: white;
-      padding: 20px;
-      text-align: center;
-}
-
-.main-content {
-      padding: 30px;
-      max-width: 800px;
-      margin: auto;
-}
-
-.card {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-}
-
-.chatbot-section {
-      background: white;
-      padding: 20px;
-      border-radius: 12px;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      margin-bottom: 30px;
-}
-
-.chatbot-section h2 {
-      color: #2c3e50;
-      margin-bottom: 10px;
-}
-
-    #chatbox {
-      height: 300px;
-      overflow-y: auto;
-      border: 1px solid #ddd;
-      padding: 10px;
-      background: #fff;
-      border-radius: 8px;
-      margin-bottom: 15px;
-}
-
-.input-row,.action-row {
-      display: flex;
-      gap: 10px;
-      margin-bottom: 10px;
-}
-
-    #chatInput {
-      flex: 1;
-      padding: 10px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-size: 16px;
-}
-
-    button {
-      padding: 10px 14px;
-      border: none;
-      border-radius: 8px;
-      background-color: #27ae60;
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: background 0.3s ease;
-}
-
-    button:hover {
-      background-color: #219150;
-}
-
-    select {
-      padding: 8px;
-      border-radius: 6px;
-      border: 1px solid #ccc;
-      font-size: 15px;
-}
-
-    footer {
-      text-align: center;
-      padding: 20px;
-      background: #eee;
-      font-size: 14px;
-}
-  </style>
-</head>
-<body>
-
-  <header>
-    <h1>Pro Dropshipping Page</h1>
-    <p>Welcome to your smart product assistant</p>
-  </header>
-
-  <div class="main-content">
-
-    <div class="card">
-      <h2>🔍 Quick Product Finder</h2>
-      <p>Niba ushaka kumenya aho wabona ibicuruzwa bitandukanye, andika izina ryabyo hasi:</p>
-      <input type="text" placeholder="Andika izina cyangwa..." style="width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;">
-      <button style="margin-top:10px;">Nta bisubizo</button>
-    </div>
-
-    <section class="chatbot-section">
-      <h2>🤖 Chatbot y'Ubwenge bw'Ubukorano</h2>
-      <p>Shyiramo ikibazo, uvuge, cyangwa usabe image/stock:</p>
-
-      <div id="chatbox"></div>
-
-      <div class="input-row">
-        <input type="text" id="chatInput" placeholder="Andika ikibazo..." />
-        <button id="voiceBtn">🔊</button>
-        <button id="sendBtn">Ohereza</button>
-      </div>
-
-      <div class="action-row">
-        <button id="imgGenBtn">🖼️ Generate Image</button>
-        <button id="stockBtn">📦 Reba Stock</button>
-        <select id="lang">
-          <option value="rw-RW">Kinyarwanda</option>
-          <option value="sw">Kiswahili</option>
-          <option value="en-US">English</option>
-        </select>
+            <div style="display:flex;gap:8px;flex-direction:column">
+              <a href="https://wa.me/25771633859?text=Muraho%20Boutique%20Smart.%20Ndakeneye%20ubufasha." target="_blank" rel="noopener" class="btn">WhatsApp Support</a>
+              <div style="color:var(--muted);font-size:0.95rem;margin-top:8px">
+                Service maintenance: 24/7. <br>
+                📞 +25771633859 | 📧 ornoirbruce5@gmail.com
+              </div>
+            </div>
+          </article>
+        </aside>
       </div>
     </section>
 
+    <!-- Contact Form -->
+    <!-- Comment: Uses FormSubmit.io for POST -->
+    <section id="contact" class="reveal">
+      <h2>Contact</h2>
+      <form action="https://formsubmit.co/ornoirbruce5@gmail.com" method="POST" id="contactForm">
+        <input type="hidden" name="_subject" id="prefillSubject" value="Demande de contact — Boutique Smart">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <input name="name" placeholder="Izina" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)">
+          <input name="email" type="email" placeholder="Email" required style="padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)">
+        </div>
+        <textarea name="message" placeholder="Ubutumwa..." required style="width:100%;margin-top:8px;padding:10px;border-radius:8px;border:1px solid rgba(255,255,255,0.03);background:transparent;color:var(--text)"></textarea>
+        <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+          <button class="btn" type="submit">Ohereza</button>
+          <button class="btn secondary" type="button" id="prefillCTA">CTA: Dushorere</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- Footer -->
+    <footer class="reveal">
+      <div><strong>Contact</strong> 📞 +25771633859 | 📧 ornoirbruce5@gmail.com | 📍 Gihosha Gisandema</div>
+      <div style="display:flex;gap:12px;align-items:center">
+        <a href="https://wa.me/25771633859" aria-label="WhatsApp" target="_blank">WhatsApp</a>
+        <a href="#" aria-label="Instagram">Instagram</a>
+        <a href="#" aria-label="Facebook">Facebook</a>
+        <!-- Inline QR code using canvas generated by JS for site -->
+        <canvas id="qrCanvas" width="88" height="88" style="border-radius:8px;background:var(--glass)"></canvas>
+      </div>
+      <small style="color:var(--muted)">© Boutique Smart — Tous droits réservés</small>
+    </footer>
   </div>
 
-  <footer>
-    &copy; 2025 Pro Dropshipping. All rights reserved.
-  </footer>
-
-  <script src="https://js.puter.com/v2/"></script>
-  <script>
-    const chatbox = document.getElementById("chatbox");
-    const input = document.getElementById("chatInput");
-    const sendBtn = document.getElementById("sendBtn");
-    const voiceBtn = document.getElementById("voiceBtn");
-    const imgGenBtn = document.getElementById("imgGenBtn");
-[10/10, 14:00] Microsoft Copilot: const stockBtn = document.getElementById("stockBtn");
-    const langSelect = document.getElementById("lang");
-
-    function appendMessage(sender, text) {
-      const msg = document.createElement("p");
-      msg.innerHTML = `<strong>${sender}:</strong> ${text}`;
-      chatbox.appendChild(msg);
-      chatbox.scrollTop = chatbox.scrollHeight;
-      puter.db.insert("chat_history", { sender, text});
-}
-
-    sendBtn.onclick = () => {
-      const userMsg = input.value.trim();
-      if (!userMsg) return;
-      appendMessage("Wowe", userMsg);
-      input.value = "";
-      puter.ai.chat(userMsg, { model: "gpt-5-nano"}).then(response => {
-        appendMessage("Chatbot", response);
-}).catch(() => {
-        appendMessage("Chatbot", "Hari ikibazo mu gusubiza.");
-});
-};
-
-    voiceBtn.onclick = () => {
-      const recognition = new webkitSpeechRecognition();
-      recognition.lang = langSelect.value;
-      recognition.onresult = event => {
-        input.value = event.results[0][0].transcript;
-};
-      recognition.start();
-};
-
-    imgGenBtn.onclick = () => {
-      const prompt = input.value.trim();
-      if (!prompt) return alert("Andika icyo ushaka ko gifotorwa.");
-      appendMessage("Wowe", `🖼️ Saba image: ${prompt}`);
-      puter.ai.image(prompt).then(url => {
-        appendMessage("Chatbot", `<img src="${url}" style="max-width:100%;">`);
-}).catch(() => {
-        appendMessage("Chatbot", "Ntibyakunze gukora image.");
-});
-};
-
-    stockBtn.onclick = () => {
-      const query = input.value.trim();
-      if (!query) return alert("Andika izina ry'igicuruzwa.");
-      appendMessage("Wowe", `📦 Saba stock ya: ${query}`);
-      const stock = ["phone", "laptop", "charger", "earbuds"];
-      const found = stock.includes(query.toLowerCase());
-      const response = found? `Igicuruzwa "${query}" kirahari.`: `Igicuruzwa "${query}" ntikiraboneka.`;
-      appendMessage("Chatbot", response);
-};
+  <!-- Embedded stock JSON (comment: this stands for external JSON inlined) -->
+  <script id="stockData" type="application/json">
+  [
+    {"id":1,"name":"Imvura Jacket","desc":"Jacket y'ibara ryijimye, ifite ubushyuhe n'ubwiza","price":"45,000 BIF","img":"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='100%' height='100%' fill='%230b1220'/><text x='50%' y='50%' fill='%23fff' font-size='14' text-anchor='middle'>Imvura Jacket</text></svg>"},
+    {"id":2,"name":"Ikoti rya Muco","desc":"Ikoti gakondo rifite ubudodo bwa kinyarwanda","price":"65,000 BIF","img":"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='100%' height='100%' fill='%230b1220'/><text x='50%' y='50%' fill='%23fff' font-size='14' text-anchor='middle'>Ikoti rya Muco</text></svg>"},
+    {"id":3,"name":"Agatabo k'Impano","desc":"Agatabo gato ka memoire", "price":"8,000 BIF","img":"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><rect width='100%' height='100%' fill='%230b1220'/><text x='50%' y='50%' fill='%23fff' font-size='14' text-anchor='middle'>Agatabo</text></svg>"}
+  ]
   </script>
 
-</body>
-</html>
-                <div class="chat-controls">
-                  <input id="chatInput" class="chat-input" placeholder="Andika cyangwa kanda icon y'ijwi..." aria-label="Chat input" />
-                  <button id="voiceBtn" class="voice-btn" title="Tangira kuvuga">🎙️</button>
-                  <button id="sendBtn" class="cta">Ohereza</button>
-                </div>
-
-                <div style="display:flex;gap:8px;margin-top:8px">
-                  <button id="imgGenBtn" class="toggle">Generate Image</button>
-                  <div class="muted" style="margin-left:auto">Language: <select id="botLang"><option value="rw">Kinyarwanda</option><option value="sw">Kiswahili</option></select></div>
-                </div>
-
-              </div>
-
-            </div>
-
-            <!-- Right column: product quick view & map -->
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div class="card">
-                <h4>Quick Product Finder</h4>
-                <input id="quickFind" class="search" placeholder="Andika izina ry'igicuruzwa..." />
-                <div id="quickResult" class="muted" style="margin-top:12px">Nta bisubizo</div>
-                <button id="askStockBtn" class="cta" style="margin-top:8px">Saba Chatbot kureba stock</button>
-              </div>
-
-              <div class="card">
-                <h4>Aho turi</h4>
-                <div class="map" id="mapEmbed">
-                  <!-- Google Maps iframe embed with provided coords -->
-                  <iframe title="Gihosha Gisandema map" src="https://www.google.com/maps?q=-3.36392,29.378&z=15&output=embed" style="width:100%;height:100%;border:0" loading="lazy"></iframe>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <hr style="border:none;height:24px"/>
-
-      <!-- CONTACT & WHATSAPP SUPPORT -->
-      <section id="contact" class="reveal">
-        <h2>Contact & Support</h2>
-        <div class="grid" style="grid-template-columns:1fr 360px">
-          <div class="card">
-            <form id="contactForm" action="https://formsubmit.co/YOUR_EMAIL" method="POST">
-              <!-- Prefill subject from CTA via JS -->
-              <input type="hidden" name="_subject" id="prefillSubject" value="Gushaka igiciro" />
-              <div style="display:flex;gap:8px;flex-direction:column">
-                <label class="muted">Izina</label>
-                <input name="name" required class="search" />
-                <label class="muted">Email</label>
-                <input name="email" type="email" required class="search" />
-                <label class="muted">Ubutumwa</label>
-                <textarea name="message" rows="5" required class="search"></textarea>
-                <button class="cta" type="submit">Ohereza Ubutumwa</button>
-              </div>
-            </form>
-          </div>
-          <div class="card">
-            <h4>WhatsApp Support</h4>
-            <p class="muted">Twandikire kuri WhatsApp kuri numero yihuse:</p>
-            <a id="waLink" class="cta" href="https://wa.me/25771633859?text=Muraho%20Boutique%20Smart%20-%20Ndashaka%20ubufasha" target="_blank" rel="noopener">Tangira WhatsApp</a>
-            <div style="margin-top:12px" class="muted">Support: Maintenance, Orders, Returns</div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Footer with contact info and QR code -->
-      <footer class="reveal">
-        <div class="card" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
-          <div>
-            <div><strong>📞 +25771633859</strong> | 📧 <strong>ornoirbruce5@gmail.com</strong></div>
-            <div class="muted">📍 Gihosha Gisandema</div>
-            <div style="margin-top:8px" class="socials">
-              <a class="navlink" href="https://wa.me/25771633859">WhatsApp</a>
-              <a class="navlink" href="https://instagram.com">Instagram</a>
-              <a class="navlink" href="https://facebook.com">Facebook</a>
-            </div>
-          </div>
-
-          <div style="display:flex;gap:12px;align-items:center">
-            <div class="qr" id="qrContainer" title="skana WhatsApp QR">
-              <!-- Minimal inline QR via data URL would be integrated by JS -->
-              <img src="whatsapp-qr.jpg" alt="whatsapp QR Code" width="80" height="80" aria-hidden="true"></canvas>
-            </div>
-            <div class="muted" style="font-size:13px">© Boutique Smart</div>
-          </div>
-        </div>
-      </footer>
-
-    </div>
-  </main>
-
-  <!-- Embedded JSON stock data and jokes -->
-  <script>
-    /* ========== Embedded data: stock.json (embedded) ========== */
-    const STOCK_JSON = [
-      {"id":"p1","name":"Robe Elegante","category":"imyenda","desc":"Robe yoroheje, ibara ryiza, sizes S-XL","price":"35,000 BIF","stock":12,"img":"https://images.unsplash.com/photo-1541099649105-f69ad21f3246?q=80&w=600&auto=format&fit=crop"},
-      {"id":"p2","name":"Sneakers Sport","category":"inkweto","desc":"Inkweto zigezweho, zifite comfort","price":"45,000 BIF","stock":6,"img":"https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?q=80&w=600&auto=format&fit=crop"},
-      {"id":"p3","name":"Set ya Makeup","category":"ubwiza","desc":"Set y'ibanze ku bwiza, long-lasting","price":"20,000 BIF","stock":20,"img":"https://images.unsplash.com/photo-1522335789203-aabd1fc54bc9?q=80&w=600&auto=format&fit=crop"}
-    ];
-
-    /* jokes in Kirundi */
-    const JOKES = [
-      "Umuntu yabajije imbwa niba yakwiga; imbwa iramusubiza iti: 'Ndiga, ariko sinzi kwandika!'",
-      "Umwana ati: 'Mama, ndota mfite amafaranga.' Mama aramubaza ati: 'Ese ni amafaranga y'ukuri?' Umwana ati: 'Oya, ni ayo kurya!'",
-      "Umugabo agiye kugura ifarashi ariko yose ari 'out of stock'."
-    ];
-  </script>
-
-  <!-- Main JS: Puter.js style chatbot, speech, stock search, jokes, theme, animations, QR -->
+  <!-- Core JavaScript: Puter-style logic, speech, image generator, UI interactions -->
   <script>
     /* ============================
-       Utility & Initialization
-       - Theme toggle, reveal on scroll, smooth interactions
+       Utilities & Initialization
+       Comments explain each block and purpose
        ============================ */
 
-    (function(){
-      // Simple reveal on scroll
-      const revealEls = document.querySelectorAll('.reveal');
-      const io = new IntersectionObserver((entries)=>{
-        entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('active'); });
+    // Theme toggle (dark/light) persisted in localStorage
+    (function themeInit(){
+      const tBtn = document.getElementById('toggle-theme');
+      const saved = localStorage.getItem('theme') || 'dark';
+      if(saved === 'light') document.documentElement.setAttribute('data-theme','light');
+      tBtn.addEventListener('click', ()=>{
+        const cur = document.documentElement.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+        document.documentElement.setAttribute('data-theme', cur === 'light' ? 'light' : 'dark');
+        localStorage.setItem('theme', cur);
+        tBtn.setAttribute('aria-pressed', cur === 'light');
+      });
+    })();
+
+    // Simple reveal on scroll
+    (function revealObserver(){
+      const obs = new IntersectionObserver(entries=>{
+        entries.forEach(e=>{
+          if(e.isIntersecting) e.target.classList.add('visible');
+        });
       }, {threshold:0.12});
-      revealEls.forEach(el=>io.observe(el));
+      document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+    })();
 
-      // Theme toggle
-      const themeToggle = document.getElementById('themeToggle');
-      const root = document.documentElement;
-      const savedTheme = localStorage.getItem('theme') || 'dark';
-      root.setAttribute('data-theme', savedTheme);
-      themeToggle.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
-      themeToggle.addEventListener('click',()=>{
-        const t = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-        root.setAttribute('data-theme', t); localStorage.setItem('theme', t);
-        themeToggle.textContent = t === 'dark' ? '🌙' : '☀️';
-      });
-
-      // Smooth scroll for internal links and CTA prefill
-      document.querySelectorAll('a[href^="#"]').forEach(a=>{
-        a.addEventListener('click', (ev)=>{
-          ev.preventDefault();
-          const href = a.getAttribute('href');
-          const parts = href.split('?');
-          const id = parts[0].slice(1);
-          const params = new URLSearchParams(parts[1] || '');
-          if(params.has('subject')) document.getElementById('prefillSubject').value = decodeURIComponent(params.get('subject'));
-          const target = document.getElementById(id);
-          if(target) target.scrollIntoView({behavior:'smooth'});
-        });
-      });
+    // Greeting audio: generate a short French greeting via SpeechSynthesis first-run
+    (function greetingAudio(){
+      const synth = window.speechSynthesis;
+      const audioEl = document.getElementById('greeting-audio');
+      const text = "Bonjour, bienvenue chez Boutique Smart. Nous sommes heureux de vous servir.";
+      // Create utterance and capture to Blob via MediaStream if available (fallback: play TTS directly)
+      function playGreeting(){ 
+        const u = new SpeechSynthesisUtterance(text);
+        u.lang = 'fr-FR';
+        u.rate = 1;
+        u.pitch = 1;
+        synth.speak(u);
+      }
+      // Play on first user interaction to satisfy autoplay constraints
+      document.addEventListener('click',{once:true,passive:true},playGreeting);
     })();
 
     /* ============================
-       Stock: render table, live search, animated entry
+       Stock: read embedded JSON and populate table
        ============================ */
-    (function(){
-      const stockBody = document.getElementById('stockBody');
-      const stockCount = document.getElementById('stockCount');
-      const searchInput = document.getElementById('searchInput');
-      const filterCat = document.getElementById('filterCat');
-
-      function renderStock(list){
-        stockBody.innerHTML = '';
-        list.forEach((p, idx)=>{
-          const tr = document.createElement('tr');
-          tr.innerHTML = `
-            <td><img src="${p.img}" class="product-img" alt="${p.name}"></td>
-            <td><strong>${p.name}</strong><div class="muted" style="font-size:13px">${p.desc}</div></td>
-            <td><strong>${p.price}</strong></td>
-            <td>${p.stock > 0 ? '✔️' : '❌'}</td>
-          `;
-          tr.style.opacity=0; tr.style.transform='translateY(10px)';
-          stockBody.appendChild(tr);
-          // animate entry staggered
-          setTimeout(()=>{ tr.style.transition='all .45s cubic-bezier(.2,.9,.2,1)'; tr.style.opacity=1; tr.style.transform='none'; }, 80*idx);
-        });
-        stockCount.textContent = list.length;
-      }
-
-      function filterStock(){
-        const q = searchInput.value.trim().toLowerCase();
-        const cat = filterCat.value;
-        const filtered = STOCK_JSON.filter(p=>{
-          return (!cat || p.category===cat) && (p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
-        });
-        renderStock(filtered);
-      }
-
-      searchInput.addEventListener('input', filterStock);
-      filterCat.addEventListener('change', filterStock);
-      // initial render
-      renderStock(STOCK_JSON);
-
-      // Quick product finder uses the same stock data
-      document.getElementById('quickFind').addEventListener('input', (e)=>{
-        const q = e.target.value.trim().toLowerCase();
-        const found = STOCK_JSON.find(p=>p.name.toLowerCase().includes(q) || p.desc.toLowerCase().includes(q));
-        document.getElementById('quickResult').textContent = found ? `${found.name} — ${found.price} (${found.stock} left)` : 'Nta bisubizo';
+    const stock = JSON.parse(document.getElementById('stockData').textContent);
+    const stockBody = document.getElementById('stockBody');
+    function renderStock(rows){
+      stockBody.innerHTML = '';
+      rows.forEach((p,i)=>{
+        const tr = document.createElement('tr');
+        tr.className = 'reveal';
+        tr.style.transitionDelay = (i*60)+'ms';
+        tr.innerHTML = `
+          <td><div class="product-row"><img class="product-thumb" src="${p.img}" alt="${p.name}"></div></td>
+          <td><strong>${p.name}</strong><div style="color:var(--muted);font-size:0.92rem">${p.desc}</div></td>
+          <td><strong>${p.price}</strong></td>
+        `;
+        stockBody.appendChild(tr);
+        // Animated reveal
+        setTimeout(()=>tr.classList.add('visible'), 80 + i*80);
       });
+    }
+    renderStock(stock);
 
-      // askStockBtn triggers chat query to Puter
-      document.getElementById('askStockBtn').addEventListener('click', ()=>{
-        const q = document.getElementById('quickFind').value || 'Reba stock';
-        Puter.handleUser(`Soma stock: ${q}`);
-      });
-    })();
-
-    /* ============================
-       Jokes: daily rotation, localStorage to avoid repeats
-       ============================ */
-    (function(){
-      const jokeText = document.getElementById('jokeText');
-      const newJokeBtn = document.getElementById('newJoke');
-      const speakJokeBtn = document.getElementById('speakJoke');
-      const usedKey = 'boutique_jokes_used';
-      const used = JSON.parse(localStorage.getItem(usedKey) || '[]');
-
-      function pickDaily(){
-        // pick based on day index to have daily variety, but avoid repeats until cycle completes
-        const day = new Date().toDateString();
-        const stored = localStorage.getItem('boutique_joke_day');
-        if(stored && JSON.parse(stored).day === day){
-          const idx = JSON.parse(stored).idx;
-          return idx;
-        } else {
-          const remaining = JOKES.map((j,i)=>i).filter(i=>!used.includes(i));
-          if(!remaining.length){ localStorage.removeItem(usedKey); localStorage.setItem(usedKey, JSON.stringify([])); return Math.floor(Math.random()*JOKES.length); }
-          const pick = remaining[Math.floor(Math.random()*remaining.length)];
-          used.push(pick); localStorage.setItem(usedKey, JSON.stringify(used));
-          localStorage.setItem('boutique_joke_day', JSON.stringify({day, idx:pick}));
-          return pick;
-        }
-      }
-
-      function showJoke(idx){
-        jokeText.textContent = JOKES[idx];
-        document.getElementById('jokeUsedCount').textContent = JSON.parse(localStorage.getItem(usedKey) || '[]').length;
-      }
-
-      const idx = pickDaily(); showJoke(idx);
-
-      newJokeBtn.addEventListener('click', ()=>{
-        // clear day to force new pick
-        localStorage.removeItem('boutique_joke_day');
-        const newIdx = pickDaily();
-        showJoke(newIdx);
-      });
-
-      // speak in Kinyarwanda (or fallback voice)
-      speakJokeBtn.addEventListener('click', ()=>{
-        const s = new SpeechSynthesisUtterance(jokeText.textContent);
-        // prefer Kinyarwanda-like voice (no official code), try sw or rw via voice selection
-        const voices = speechSynthesis.getVoices();
-        const pick = voices.find(v=>/sw|kiswahili|kiswahili|kisw/i.test(v.lang)) || voices.find(v=>/fr|fr-FR/i.test(v.lang)) || voices[0];
-        if(pick) s.voice = pick;
-        s.lang = pick ? pick.lang : 'rw-RW';
-        speechSynthesis.speak(s);
-      });
-    })();
-
-    /* ============================
-       Simple QR generation (canvas) for footer
-       ============================ */
-    (function(){
-      const canvas = document.getElementById('qrCanvas');
-      const ctx = canvas.getContext('2d');
-      // minimal visual QR placeholder (not real scannable); draws logo-like pattern
-      ctx.fillStyle = '#e6eef6';
-      ctx.fillRect(0,0,80,80);
-      ctx.fillStyle = '#071226';
-      for(let i=0;i<6;i++){
-        for(let j=0;j<6;j++){
-          if(Math.random()>0.6) ctx.fillRect(4+i*12,4+j*12,8,8);
-        }
-      }
-    })();
-
-    /* ============================
-       PUTER.JS STYLE CHATBOT
-       - Lightweight local engine emulating Puter.js features:
-         * handles text and voice input
-         * simple "intelligent" routing: product lookup, greeting, jokes, image gen request
-         * uses Web Speech API for recognition and synthesis
-         * inserts emojis based on sentiment keywords
-         * can "generate image" via placeholder flow (puter.ai.txt2img simulated)
-       ============================ */
-
-    const Puter = (function(){
-      // internal chat state
-      const chatWindow = document.getElementById('chatWindow');
-      const input = document.getElementById('chatInput');
-      const sendBtn = document.getElementById('sendBtn');
-      const voiceBtn = document.getElementById('voiceBtn');
-      const imgGenBtn = document.getElementById('imgGenBtn');
-      const botLangSelect = document.getElementById('botLang');
-
-      // basic emoji injection rules
-      const EMOJI_MAP = [
-        {words:['urakoze','murakoze','thanks','thank'], emo:'🙏'},
-        {words:['neza','nziza','😍','like','love'], emo:'❤️'},
-        {words:['hate','bad','nta','not'], emo:'😕'},
-        {words:['haha','hahaha','joke','jokes'], emo:'😂'},
-        {words:['sale','giciro','discount','offer'], emo:'🔥'}
-      ];
-
-      // helper to add message
-      function addMessage(text, who='bot'){
-        const el = document.createElement('div');
-        el.className = 'message ' + (who==='user' ? 'user-msg' : 'bot-msg');
-        el.innerHTML = text;
-        chatWindow.appendChild(el);
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-      }
-
-      // simple sentiment/emoji function
-      function emojisFor(text){
-        const t = text.toLowerCase();
-        const found = EMOJI_MAP.filter(m=>m.words.some(w=>t.includes(w)));
-        return found.length ? ' ' + found.map(f=>f.emo).join('') : '';
-      }
-
-      // simple text "intelligence" rules: product query, stock check, jokes, greetings, image requests
-      function generateReply(text){
-        const t = text.toLowerCase();
-        // product lookup intent
-        if(/stock|ibicuruzwa|biriho|bihari|reba stock|soma stock|have|in stock|igicuruzwa/.test(t)){
-          const name = text.split(':')[1] ? text.split(':')[1].trim() : text;
-          const found = STOCK_JSON.find(p => p.name.toLowerCase().includes(name.toLowerCase()) || p.desc.toLowerCase().includes(name.toLowerCase()));
-          if(found){
-            return `Turi dufite <strong>${found.name}</strong> — ${found.price} 🛍️${found.stock>0 ? ' (hari muri stock)' : ' (nta stock)'}${emojisFor(text)}`;
-          } else {
-            // fuzzy search
-            const possible = STOCK_JSON.filter(p=>p.name.toLowerCase().includes(name.toLowerCase()) || p.desc.toLowerCase().includes(name.toLowerCase()));
-            if(possible.length) return `Habonetse amahitamo: ${possible.map(p=>p.name).join(', ')}. ${emojisFor(text)}`;
-            return `Ndabona tutabifite neza, wampa izina ryuzuye cyangwa usabe gufata urugero, turagufasha ✨`;
-          }
-        }
-        // image generation intent
-        if(/image|draw|shushanya|generate|gushushanya|amafoto|foto/.test(t)){
-          return {type:'image', prompt: text};
-        }
-        // joke
-        if(/joke|jokes|urwenya|guseka|vuga joke/.test(t)){
-          const idx = Math.floor(Math.random()*JOKES.length);
-          return `Urwenya: ${JOKES[idx]} ${emojisFor(text)}`;
-        }
-        // greeting
-        if(/muraho|hello|hi|mwaramutse|bonsoir|bonsoir|salama|habari/.test(t)){
-          return `Muraho! Nishimiye kugufasha 😊${emojisFor(text)}`;
-        }
-        // price or offer
-        if(/price|giciro|cost|igiciro/.test(t)){
-          // return list of matches
-          const matches = STOCK_JSON.map(p=>`${p.name}: ${p.price}`).join(' · ');
-          return `Dore bimwe mu biciro: ${matches} ${emojisFor(text)}`;
-        }
-        // fallback: friendly assistant reply (simulated LLM)
-        return `Ndagufasha: ${text}. Niba ushaka ibicuruzwa, andika izina ry'igicuruzwa cyangwa kanda "Saba Chatbot kureba stock". ${emojisFor(text)}`;
-      }
-
-      // text-to-speech function using selected language preference
-      function speakText(txt, langCode){
-        const utter = new SpeechSynthesisUtterance(txt);
-        // choose voice by language preference or fallback
-        const voices = speechSynthesis.getVoices();
-        let pref = null;
-        if(langCode === 'rw'){ // Kinyarwanda: try Swahili or French fallback
-          pref = voices.find(v=>/rw|kinyarwanda/i.test(v.lang)) || voices.find(v=>/sw|kiswahili/i.test(v.lang)) || voices.find(v=>/fr/i.test(v.lang)) || voices[0];
-        } else if(langCode === 'sw'){
-          pref = voices.find(v=>/sw|kiswahili/i.test(v.lang)) || voices.find(v=>/en/i.test(v.lang)) || voices[0];
-        } else {
-          pref = voices.find(v=>v.lang.startsWith(langCode)) || voices[0];
-        }
-        if(pref) utter.voice = pref;
-        utter.lang = pref ? pref.lang : (langCode === 'rw' ? 'rw-RW' : (langCode === 'sw' ? 'sw-KE' : langCode));
-        speechSynthesis.cancel();
-        speechSynthesis.speak(utter);
-      }
-
-      // simulated image generation "puter.ai.txt2img" placeholder
-      function generateImage(prompt){
-        // show interim bot message then replace with generated image
-        addMessage(`<div>Ndimo gushinga ifoto: <em>${prompt}</em> ⏳</div>`);
-        setTimeout(()=>{
-          // create simple data card with placeholder image from unsplash with query
-          const q = encodeURIComponent(prompt.split(' ').slice(0,5).join(' '));
-          const url = `https://source.unsplash.com/400x300/?${q}`;
-          addMessage(`<div><img src="${url}" alt="${prompt}" style="width:100%;border-radius:8px"/><div class="muted" style="margin-top:6px">Ifoto yashushanyijwe hashingiwe kuri: "${prompt}"</div></div>`);
-        }, 1200);
-      }
-
-      /* ================
-         Public handlers
-         ================ */
-
-      function handleUser(text){
-        if(!text) return;
-        addMessage(text, 'user');
-        // generate reply
-        const reply = generateReply(text);
-        // if reply indicates image generation
-        if(typeof reply === 'object' && reply.type === 'image'){
-          // simulate image generation and TTS
-          setTimeout(()=>{ generateImage(reply.prompt); speakText('Nakoze ifoto yawe', botLangSelect.value); }, 600);
-          addMessage(`<div class="muted">Ibyifuzo byo gushushanya byakiriwe 🎨</div>`);
-          return;
-        }
-        // plain text reply
-        setTimeout(()=>{
-          addMessage(reply);
-          // TTS in selected language (Kinyarwanda or Kiswahili)
-          const lang = botLangSelect.value;
-          speakText(stripHtml(reply), lang);
-        }, 600);
-      }
-
-      // simple html stripper
-      function stripHtml(html){
-        const tmp = document.createElement('div'); tmp.innerHTML = html; return tmp.textContent || tmp.innerText || '';
-      }
-
-      // wire up UI controls
-      sendBtn.addEventListener('click', ()=>{ const v = input.value.trim(); if(!v) return; handleUser(v); input.value=''; });
-      input.addEventListener('keydown', (e)=>{ if(e.key==='Enter' && !e.shiftKey){ e.preventDefault(); sendBtn.click(); }});
-      imgGenBtn.addEventListener('click', ()=>{ const p = input.value.trim() || prompt('Sobanura ifoto wifuza (mu Kinyarwanda cyangwa Kiswahili)'); if(p) handleUser('generate image: ' + p); });
-
-      // voice recognition
-      let recognition = null;
-      function initRecognition(){
-        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-        if(!SpeechRecognition) return null;
-        const r = new SpeechRecognition();
-        r.continuous = false; r.interimResults = false;
-        // try to set language to Kinyarwanda-like (rw) or Swahili for recognition
-        r.lang = 'rw-RW';
-        r.onresult = (ev)=>{
-          const t = ev.results[0][0].transcript;
-          input.value = t;
-          handleUser(t);
-        };
-        r.onerror = (ev)=>{ console.warn('Recognition error', ev); };
-        return r;
-      }
-
-      voiceBtn.addEventListener('click', ()=>{
-        if(!recognition) recognition = initRecognition();
-        if(!recognition){ alert('Icyuma cyo kumva ivuga ntabwo kiboneka kuri browser yawe'); return; }
-        try{
-          recognition.start();
-        } catch(e){
-          // already started; stop
-          recognition.stop();
-        }
-      });
-
-      // expose quick entry for other modules
-      return { handleUser };
-    })();
-
-    // Expose Puter globally for quick access by other UI buttons
-    window.Puter = Puter;
-
-    /* ============================
-       Auto-play audio greeting in French on user gesture
-       - We'll synthesize a short greeting via TTS in French and play it once after an interaction
-       ============================ */
-    (function(){
-      const greetingText = 'Bonjour et bienvenue chez Boutique Smart. Nous sommes prêts à vous aider.';
-      const greet = ()=>{
-        const u = new SpeechSynthesisUtterance(greetingText);
-        const v = speechSynthesis.getVoices().find(x=>/fr|fr-FR/i.test(x.lang)) || speechSynthesis.getVoices()[0];
-        if(v) u.voice = v;
-        u.lang = v ? v.lang : 'fr-FR';
-        speechSynthesis.speak(u);
-        document.removeEventListener('click', greet);
-      };
-      // wait for any click to deliver greeting (avoids autoplay block)
-      document.addEventListener('click', greet, {once:true});
-    })();
-
-    /* ============================
-       Accessibility: focus chat when open
-       ============================ */
-    document.getElementById('openChat').addEventListener('click', ()=>{
-      document.getElementById('chat').scrollIntoView({behavior:'smooth'});
-      setTimeout(()=>document.getElementById('chatInput').focus(),600);
+    // Live search on stock
+    document.getElementById('search').addEventListener('input', e=>{
+      const q = e.target.value.trim().toLowerCase();
+      const filtered = stock.filter(p => (p.name + ' ' + p.desc + ' ' + p.price).toLowerCase().includes(q));
+      renderStock(filtered);
     });
 
     /* ============================
-       WhatsApp autoresponder link already in place; ensure message param is encoded
+       Testimonials (Feedback section)
        ============================ */
-    (function(){
-      const wa = document.getElementById('waLink');
-      const defaultMsg = encodeURIComponent('Muraho Boutique Smart, ndashaka ubufasha kuri order.');
-      wa.href = `https://wa.me/25771633859?text=${defaultMsg}`;
+    const testimonials = [
+      {name:"Alice",text:"Serivisi nziza cane! 🥰",rating:5},
+      {name:"Jean",text:"Ibicuruzwa byujuje ubuziranenge 😎",rating:4},
+      {name:"Marie",text:"Nabonye igiciro cyiza 👍",rating:5}
+    ];
+    const testiList = document.getElementById('testiList');
+    testimonials.forEach(t=>{
+      const d = document.createElement('div');
+      d.className = 'testi';
+      d.innerHTML = `<strong>${t.name}</strong><div style="color:var(--muted)">${t.text} ${"⭐".repeat(t.rating)}</div>`;
+      testiList.appendChild(d);
+    });
+
+    /* ============================
+       Joke Spinner: unique daily joke in Kirundi using localStorage
+       ============================ */
+    const jokes = [
+      "Umukenyezi yabajije: 'Ese urakunda inyama?'; Umugabo ati: 'Ndazikunda ariko sinzizi uko natwika.' 😂",
+      "Umwana arabaza: 'Papa, telephone yanyu iragenda gute?' Papa: 'Ni smartphone, iriritse!' 😅",
+      "Umuntu arareba isaha nyinshi, aravuga ati: 'Saa niyo?'. 😆"
+    ];
+    function getDailyJoke(){
+      const key = 'boutique:joke:'+new Date().toISOString().slice(0,10);
+      let v = localStorage.getItem(key);
+      if(v) return v;
+      // choose random not used previously this session
+      const pool = jokes.slice();
+      v = pool[Math.floor(Math.random()*pool.length)];
+      localStorage.setItem(key, v);
+      return v;
+    }
+    document.getElementById('spinJoke').addEventListener('click', ()=>{
+      const j = getDailyJoke();
+      document.getElementById('jokeText').textContent = j;
+    });
+    document.getElementById('readJoke').addEventListener('click', ()=>{
+      const j = document.getElementById('jokeText').textContent || getDailyJoke();
+      const u = new SpeechSynthesisUtterance(j);
+      u.lang = 'rn-RW' || 'ki-RW';
+      speechSynthesis.speak(u);
+    });
+
+    /* ============================
+       QR Code: simple site QR drawn via canvas (URL fallback)
+       ============================ */
+    (function drawQR(){
+      const c = document.getElementById('qrCanvas');
+      if(!c) return;
+      const ctx = c.getContext('2d');
+      ctx.fillStyle = getComputedStyle(document.documentElement).getPropertyValue('--card') || '#0b1220';
+      ctx.fillRect(0,0,c.width,c.height);
+      // Simple pattern to mimic QR visually (not a valid QR for production)
+      ctx.fillStyle = '#fff';
+      for(let x=6;x<80;x+=12){
+        for(let y=6;y<80;y+=12){
+          if(Math.random()>0.6) ctx.fillRect(x,y,6,6);
+        }
+      }
     })();
 
     /* ============================
-       Contact form: uses FormSubmit.io (replace YOUR_EMAIL in form action)
+       Contact CTA prefill
        ============================ */
-    (function(){
-      const form = document.getElementById('contactForm');
-      form.addEventListener('submit', (e)=>{
-        // allow normal POST to formsubmit; we can add a little UX change before submit
-        const btn = form.querySelector('button[type="submit"]');
-        btn.disabled = true; btn.textContent = 'Ohereza...';
-        setTimeout(()=>{ btn.disabled=false; btn.textContent='Ohereza Ubutumwa'; }, 3000);
+    document.getElementById('prefillCTA').addEventListener('click', ()=>{
+      document.getElementById('prefillSubject').value = 'Demande: Dushorere kugiciro gito';
+      document.getElementById('contactForm').scrollIntoView({behavior:'smooth'});
+    });
+
+    /* ============================
+       Puter.js style Chatbot (local, simulated intelligence)
+       - Supports: text input, voice recognition (SpeechRecognition), text-to-speech (Kinyarwanda + Kiswahili)
+       - Can search stock JSON and respond with emojis and image generation via canvas
+       ============================ */
+
+    // Utility: choose emoji based on sentiment/key words
+    function pickEmoji(text){
+      const t = text.toLowerCase();
+      if(/\b(pas|nta|ntab)\b/.test(t)) return "😕";
+      if(/\b(rin|nziza|iza|smile|like| 👍|😍|😊)\b/.test(t)) return "😊";
+      if(/\b(igiciro|price|biciro)\b/.test(t)) return "💸";
+      return "🤖";
+    }
+
+    // Simulated Puter module
+    const Puter = {
+      // simulate intelligence: can answer general Qs, search stock, and call text2img
+      async respond(input, opts={voice:true}){
+        const q = (input||'').trim();
+        // if asks about stock items
+        const found = stock.filter(p => (p.name + ' ' + p.desc + ' ' + p.price).toLowerCase().includes(q.toLowerCase()));
+        if(found.length){
+          const list = found.map(p=>`${p.name} — ${p.price}`).join(' ; ');
+          return {text:`Nabonye ibi bicuruzwa: ${list}`, meta:{type:'stock',items:found}};
+        }
+        // image generation trigger
+        if(q.toLowerCase().startsWith('image:') || q.toLowerCase().includes('shushanya') || q.toLowerCase().includes('foto')){
+          const prompt = q.replace(/^image:\s*/i,'');
+          const imgUrl = await Puter.ai.txt2img(prompt || 'Boutique product');
+          return {text:`Nakoze ifoto ishingiye ku bisobanuro: "${prompt}" ${pickEmoji(q)}`, meta:{type:'image',src:imgUrl}};
+        }
+        // default smalltalk (simulate GPT)
+        if(/(hello|muraho|bonjour|habari)/i.test(q)) return {text:`Muraho neza! Nitwa Boutique Copilot ${pickEmoji(q)}`};
+        if(q.length<3) return {text:'Ndabonye, saba ikibazo kirekire gato kugirango mbashe kugufasha 🙏'};
+        // fallback: basic helpful response referencing boutique persona
+        return {text:`Ndashobora kugufasha kubona ibicuruzwa, kuvuga ijwi, cyangwa gukora ifoto. Wabaza urugero: "Mbwira Imvura Jacket" ${pickEmoji(q)}`};
+      },
+
+      // Simulated image generator using canvas -> dataURL
+      ai:{
+        async txt2img(prompt){
+          // simple canvas with prompt text; in prod, replace with real API call
+          const w=800,h=600;
+          const cvs = document.createElement('canvas'); cvs.width=w; cvs.height=h;
+          const ctx = cvs.getContext('2d');
+          // background gradient
+          const g = ctx.createLinearGradient(0,0,w,h);
+          g.addColorStop(0,'#0b1220'); g.addColorStop(1,'#04293a');
+          ctx.fillStyle = g; ctx.fillRect(0,0,w,h);
+          // draw title
+          ctx.fillStyle = '#fff'; ctx.font = '28px sans-serif'; ctx.fillText('Boutique Smart - Preview',20,50);
+          ctx.font = '20px sans-serif'; ctx.fillText('Prompt: '+prompt,20,90);
+          // draw fake product card
+          ctx.fillStyle = '#07363a'; ctx.fillRect(50,120,700,420);
+          ctx.fillStyle='#fff'; ctx.font='18px sans-serif'; ctx.fillText(prompt,70,160);
+          // decorate
+          ctx.fillStyle = '#00d1b2'; ctx.fillRect(70,180,120,6);
+          return cvs.toDataURL('image/png');
+        }
+      }
+    };
+
+    // Chat UI interactions
+    const chatWindow = document.getElementById('chatWindow');
+    const chatInput = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    const voiceBtn = document.getElementById('voiceBtn');
+    const imgGenBtn = document.getElementById('imgGenBtn');
+
+    function appendMsg(text, who='bot', extraHtml=''){
+      const d = document.createElement('div');
+      d.className = 'msg ' + (who==='user'?'user':'bot');
+      d.innerHTML = `<div>${text}</div>${extraHtml}`;
+      chatWindow.appendChild(d);
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    }
+
+    async function handleSend(raw){
+      const text = raw.trim();
+      if(!text) return;
+      appendMsg(text,'user');
+      chatInput.value='';
+      // Puter responds
+      appendMsg('...', 'bot');
+      const resp = await Puter.respond(text);
+      // replace last bot '...' with actual
+      const last = Array.from(chatWindow.querySelectorAll('.msg.bot')).pop();
+      if(!last) return;
+      last.innerHTML = `<div>${resp.text}</div>`;
+      // if meta includes items (stock) display small cards
+      if(resp.meta && resp.meta.type === 'stock'){
+        const items = resp.meta.items;
+        const listHtml = items.map(it=>`<div style="margin-top:8px"><img src="${it.img}" style="width:60px;height:60px;border-radius:8px;vertical-align:middle;margin-right:8px"> <strong>${it.name}</strong> — ${it.price}</div>`).join('');
+        last.insertAdjacentHTML('beforeend', '<div style="margin-top:8px">'+listHtml+'</div>');
+      }
+      if(resp.meta && resp.meta.type === 'image'){
+        const src = resp.meta.src;
+        last.insertAdjacentHTML('beforeend', `<div style="margin-top:12px"><img src="${src}" alt="generated" style="width:100%;border-radius:8px"></div>`);
+      }
+      // Speak the bot response in Kinyarwanda by default, optionally switch to Kiswahili for greetings
+      const u = new SpeechSynthesisUtterance(resp.text);
+      // heuristic: use sw if message contains 'habari' or 'asante'
+      if(/habari|asante|asanteni/i.test(resp.text)) u.lang = 'sw-KE';
+      else u.lang = 'rw-RW' || 'ki-RW';
+      u.rate = 1;
+      u.pitch = 1;
+      speechSynthesis.speak(u);
+    }
+
+    sendBtn.addEventListener('click', ()=>handleSend(chatInput.value));
+    chatInput.addEventListener('keydown', e=>{ if(e.key==='Enter') handleSend(chatInput.value); });
+
+    // Image generation button triggers Puter.ai.txt2img with current input or prompt modal
+    imgGenBtn.addEventListener('click', async ()=>{
+      const prompt = chatInput.value.trim() || promptInputDialog();
+      if(!prompt) return;
+      appendMsg('Ndi gukora ifoto...', 'bot');
+      const result = await Puter.ai.txt2img(prompt);
+      appendMsg(`Ifoto yakozwe: ${pickEmoji(prompt)}`, 'bot', `<div style="margin-top:8px"><img src="${result}" alt="ai" style="width:100%;border-radius:8px"></div>`);
+    });
+
+    function promptInputDialog(){
+      return window.prompt('Andika ibisobanuro byifoto (ex: Ikoti rya kinyarwanda, ibara ritukura)') || '';
+    }
+
+    /* ============================
+       Voice recognition: SpeechRecognition in Kinyarwanda
+       - Fallback: show not supported
+       ============================ */
+    const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+    if(SpeechRecognition){
+      const rec = new SpeechRecognition();
+      rec.lang = 'rw-RW'; // attempt Kinyarwanda locale; browser may fallback
+      rec.interimResults = false;
+      rec.maxAlternatives = 1;
+      let listening=false;
+      voiceBtn.addEventListener('click', ()=>{
+        if(!listening){ try{ rec.start(); voiceBtn.textContent='🔴'; listening=true;}catch(e){console.warn(e)} }
+        else{ rec.stop(); voiceBtn.textContent='🎙️'; listening=false; }
       });
-    })();
+      rec.addEventListener('result', e=>{
+        const text = e.results[0][0].transcript;
+        handleSend(text);
+        voiceBtn.textContent='🎙️'; listening=false;
+      });
+      rec.addEventListener('error', e=>{ console.warn('Speech error', e); voiceBtn.textContent='🎙️'; listening=false; appendMsg('Voice recognition error','bot'); });
+      rec.addEventListener('end', ()=>{ listening=false; voiceBtn.textContent='🎙️'; });
+    } else {
+      voiceBtn.addEventListener('click', ()=>{ alert('Voice recognition not supported in this browser'); });
+    }
 
     /* ============================
-       Small helper: parse URL params for prefilled subject if page opened with ?subject=
+       CTA "Dushorere kugiciro gito" focus + accessibility
+       - Prefill subject and focus contact form
        ============================ */
-    (function(){
-      const params = new URLSearchParams(window.location.search);
-      if(params.get('subject')) document.getElementById('prefillSubject').value = params.get('subject');
-    })();
+    document.getElementById('cta-preorder').addEventListener('click', ()=>{
+      document.getElementById('prefillSubject').value = 'Pre-order: Dushorere kugiciro gito';
+      document.getElementById('contactForm').scrollIntoView({behavior:'smooth'});
+      document.querySelector('#contactForm [name="name"]').focus();
+    });
 
     /* ============================
-       End of script
+       Page load: show fallback if video fails
        ============================ */
+    const bgVideo = document.getElementById('bgVideo');
+    const fallback = document.getElementById('fallback');
+    bgVideo.addEventListener('error', ()=>{ bgVideo.style.display='none'; fallback.style.display='block'; });
+    // if video is blocked (autoplay), show fallback
+    setTimeout(()=>{ if(bgVideo.readyState < 2){ bgVideo.style.display='none'; fallback.style.display='block'; } }, 1500);
+
+    /* ============================
+       Small accessibility: keyboard shortcuts
+       - '/' focuses search, 'c' focuses chat input, 'j' spins joke
+       ============================ */
+    document.addEventListener('keydown', e=>{
+      if(e.key === '/') { e.preventDefault(); document.getElementById('search').focus(); }
+      if(e.key === 'c') document.getElementById('chatInput').focus();
+      if(e.key === 'j') document.getElementById('spinJoke').click();
+    });
+
+    /* ============================
+       Final: small welcome bot message to act like a boutique employee
+       - Greets visitor and offers to show stock
+       ============================ */
+    setTimeout(()=>{
+      appendMsg('Murakaza neza! Nitwa Boutique Copilot. Nabaza ushaka kureba ibicuruzwa cyangwa kuvugana na support? 😊', 'bot');
+    }, 1400);
+
   </script>
 </body>
 </html>
