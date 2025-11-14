@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="rw">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Broskie Salon — Ubwiza n’ituze</title>
+  <meta name="description" content="Broskie Salon: ubukangurambaga bw’ubwiza, hairstyle, nail art, makeup, spa—serivisi nziza ku giciro gito." />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <!-- Style -->
+  <link rel="stylesheet" href="style.css" />
+  <!-- SEO basic -->
+  <meta name="theme-color" content="#ffd6e7" />
+</head>
+<body>
+  <!-- Dark Mode Toggle -->
+  <button id="themeToggle" aria-label="Hindura mode" class="btn-toggle">🌙 Hindura Mode</button>
+
+  <!-- Hero with video background + fallback image -->
+  <header class="hero">
+    <video class="hero__video" autoplay muted loop playsinline poster="assets/fallback.jpg">
+      <!-- Placeholder video; ushobora kuyisimbuza iy’ukuri -->
+      <source src="assets/beauty-bg.mp4" type="video/mp4" />
+      <!-- Fallback image niba video yananiwe -->
+      Your browser does not support HTML5 video.
+    </video>
+    <div class="hero__overlay"></div>
+    <div class="hero__content">
+      <h1 class="title">Broskie Salon</h1>
+      <p class="subtitle">Ubwiza n’ituze ku giciro kiroroshye, serivisi z’inyongera ku rubyiruko—by’umwihariko abakobwa.</p>
+      <a href="#stock" class="cta">Dushorere kugiciro gito</a>
+    </div>
+  </header>
+
+  <!-- Stock Section (products.js) -->
+  <section id="stock" class="section">
+    <h2 class="section__title">Ibicuruzwa n’Ibikoresho by’Ubwiza</h2>
+    <p class="section__desc">Dore urutonde rw’ibicuruzwa bigezweho dukoresha kandi tugurisha kuri salon.</p>
+    <div id="productGrid" class="grid"></div>
+  </section>
+
+  <!-- Testimonials -->
+  <section id="testimonials" class="section alt">
+    <h2 class="section__title">Abakiriya bavuga iki?</h2>
+    <div class="testimonials">
+      <!-- Cards zizana na JS cyangwa wabitangira hano -->
+      <article class="testimonial-card">
+        <div class="stars" aria-label="rating">⭐⭐⭐⭐⭐</div>
+        <p class="quote">“Serivisi za hairstyle zaryoshye, amahoro n’isuku—naranezerewe 💖.”</p>
+        <span class="author">— Nadine</span>
+      </article>
+      <article class="testimonial-card">
+        <div class="stars" aria-label="rating">⭐⭐⭐⭐</div>
+        <p class="quote">“Nail art ya pastel, yitonze kandi y’ubukorikori—byari bishimishije 😊.”</p>
+        <span class="author">— Aline</span>
+      </article>
+      <article class="testimonial-card">
+        <div class="stars" aria-label="rating">⭐⭐⭐⭐⭐</div>
+        <p class="quote">“Makeup yacu yagize umunsi wanjye wihariye ✨.”</p>
+        <span class="author">— Cynthia</span>
+      </article>
+    </div>
+  </section>
+
+  <!-- Daily Joke Spinner (Kirundi) -->
+  <section id="jokes" class="section">
+    <h2 class="section__title">Ikinyoma c’umunsi</h2>
+    <p class="section__desc">Duhimbara umunsi wawe n’ikinobe kidasubiramo.</p>
+    <div class="joke-box">
+      <p id="jokeText">Fyonda “Hindura” kugira ubone ikinobe gishasha.</p>
+      <div class="joke-actions">
+        <button id="newJokeBtn" class="btn">Hindura</button>
+        <button id="resetJokesBtn" class="btn btn-outline">Subira ku ntangiriro</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Maps Embed: Gihosha Gisandema -->
+  <section id="location" class="section alt">
+    <h2 class="section__title">Aho duherereye</h2>
+    <p class="section__desc">Gihosha Gisandema, Lat: -3.4590, Long: 29.378.</p>
+    <div class="map-wrap">
+      <!-- Iframe with coordinates; placeholder map pointing around coordinates -->
+      <iframe
+        title="Gihosha Gisandema Map"
+        width="100%" height="350" style="border:0"
+        loading="lazy" allowfullscreen
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.google.com/maps?q=-3.4590,29.378&z=15&output=embed">
+      </iframe>
+    </div>
+  </section>
+
+  <!-- WhatsApp Support -->
+  <section id="support" class="section">
+    <h2 class="section__title">Duhamagare / WhatsApp</h2>
+    <p class="section__desc">Kanda hano kugira utegure rendez-vous, twagutangire ibisubizo byihuse.</p>
+    <div class="support-wrap">
+      <!-- Autoresponder Link: ujye uhindura phone/message uko ubishaka -->
+      <a class="wa-link btn" target="_blank" rel="noopener"
+         href="https://wa.me/25771633859?text=Mwaramutse%20Broskie%20Salon%2C%20ndifuza%20rendez-vous%20kuri%20serivisi%20ya%20%5Bhair%20%2F%20nails%20%2F%20makeup%5D.">
+        WhatsApp: Tegeka Rendez-vous
+      </a>
+      <!-- QR code placeholder image -->
+      <img class="qr" src="assets/whatsapp-qr.png" alt="QR WhatsApp" />
+    </div>
+  </section>
+
+  <!-- Footer with Tawk.to -->
+  <footer class="footer">
+    <div class="footer__grid">
+      <div>
+        <h3 class="footer__title">Twandikire</h3>
+        <ul class="contacts">
+          <li><strong>Telefoni:</strong> +257 716 33 859</li>
+          <li><strong>Email:</strong> ornoirbruce5@gmail.com</li>
+          <li><strong>Aderesi:</strong> Gihosha Gisandema, Bujumbura</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="footer__title">Imbuga zacu</h3>
+        <div class="socials">
+          <a href="#" aria-label="Instagram">Instagram</a>
+          <a href="#" aria-label="Facebook">Facebook</a>
+          <a href="#" aria-label="TikTok">TikTok</a>
+        </div>
+      </div>
+      <div class="footer__qr">
+        <img src="assets/salon-qr.png" alt="QR code ya Salon" />
+      </div>
+    </div>
+    <p class="copy">© Broskie Salon — Ubwiza n’ituze</p>
+
+    <!-- Tawk.to Embed: Saba ID yawe, usimbuze PROPERTY_ID na WIDGET_ID -->
+    <script type="text/javascript">
+      // Tawk.to Live Chat: ikora live chat iyo admin ari online, naho offline iba contact form
+      var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+      (function(){
+        var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+        s1.async=true;
+        // Shyiramo link yawe y’ukuri iva muri Tawk.to property settings
+        s1.src='https://embed.tawk.to/PROPERTY_ID/WIDGET_ID';
+        s1.charset='UTF-8';
+        s1.setAttribute('crossorigin','*');
+        s0.parentNode.insertBefore(s1,s0);
+      })();
+    </script>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="products.js"></script>
+  <script src="jokes.js"></script>
+  <script src="main.js"></script>
+</body>
+</html>
