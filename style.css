@@ -2,6 +2,7 @@
    - Professional LP look
    - Fast energetic animations
    - Bottom nav fixed like app
+   - Mobile responsive
 */
 
 /* 🎨 Palette */
@@ -95,8 +96,9 @@ body {
   animation: logoPop .5s ease-out both;
 }
 .subtitle {
-  font-size: 1.2rem;
+  font-size: 1rem;
   margin: 1rem 0;
+  padding: 0 1rem;
 }
 .cta {
   display: inline-block;
@@ -113,9 +115,19 @@ body {
 
 /* 📦 Sections */
 .section {
-  padding: 3rem 1rem;
+  padding: 2rem 1rem;
   max-width: 1100px;
   margin: 0 auto;
+}
+.section__title {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.section__desc {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
 }
 .section.alt {
   background: linear-gradient(135deg, var(--peach), var(--sky), var(--lilac));
@@ -126,6 +138,11 @@ body {
 }
 
 /* Product Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
 .card {
   background: var(--pearl);
   border-radius: 20px;
@@ -145,6 +162,10 @@ body {
 .price { color: var(--accent); font-weight: 700; }
 
 /* ⭐ Testimonials */
+.testimonials {
+  display: grid;
+  gap: 1rem;
+}
 .testimonial-card {
   background: var(--sky);
   color: var(--text-dark);
@@ -165,6 +186,7 @@ body {
 }
 .joke-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: .6rem;
   margin-top: .6rem;
 }
@@ -182,6 +204,8 @@ body {
   border-radius: 20px;
   box-shadow: 0 0 20px var(--accent);
   animation: fadeInFast .3s ease forwards;
+  width: 100%;
+  height: 300px;
 }
 
 /* 💬 WhatsApp */
@@ -189,6 +213,7 @@ body {
   display: grid;
   gap: 1rem;
   align-items: center;
+  justify-items: center;
 }
 .support-wrap .wa-link {
   background: linear-gradient(90deg, var(--accent), var(--peach));
@@ -201,7 +226,7 @@ body {
 }
 .support-wrap .wa-link:hover { transform: scale(1.1); }
 .qr {
-  width: 160px;
+  width: 140px;
   height: auto;
   border-radius: 12px;
   box-shadow: 0 0 20px var(--accent);
@@ -211,10 +236,24 @@ body {
 .footer {
   background: linear-gradient(180deg, var(--lilac), var(--sky));
   color: var(--text-light);
-  padding: 2rem 1rem;
+  padding: 2rem 1rem 5rem; /* extra bottom space for nav */
   text-align: center;
   box-shadow: 0 -5px 20px var(--accent);
   animation: fadeInFast .3s ease forwards;
+}
+.footer__grid {
+  display: grid;
+  gap: 1rem;
+}
+.contacts, .socials {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.socials a {
+  margin: 0 .5rem;
+  color: var(--text-light);
+  text-decoration: none;
 }
 
 /* 📱 Bottom Navigation Bar */
@@ -236,7 +275,7 @@ body {
   text-align: center;
   color: var(--text-light);
   text-decoration: none;
-  font-size: 0.8rem;
+  font-size: 0.75rem;
   transition: transform .2s ease, color .2s ease;
 }
 .nav-item .icon {
@@ -261,19 +300,77 @@ body {
   from { opacity: 0; transform: scale(0.8); }
   to { opacity: 1; transform: scale(1); }
 }
-
 @keyframes slideIn {
   from { opacity: 0; transform: translateX(-20px); }
   to { opacity: 1; transform: translateX(0); }
 }
-
 @keyframes bounceIn {
   0% { transform: scale(0.8); opacity: 0; }
   60% { transform: scale(1.1); opacity: 1; }
   100% { transform: scale(1); }
 }
-
 @keyframes fadeInFast {
   from { opacity: 0; }
   to { opacity: 1; }
+}
+
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+  }
+  .subtitle {
+    font-size: 0.9rem;
+  }
+  .section__title {
+    font-size: 1.3rem;
+  }
+  .section__desc {
+    font-size: 0.9rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .testimonial-card {
+    font-size: 0.9rem;
+  }
+  .joke-box {
+    font-size: 0.9rem;
+  }
+  .map-wrap iframe {
+    height: 220px;
+  }
+  .support-wrap .wa-link {
+    font-size: 0.9rem;
+    padding: .6rem 1rem;
+  }
+  .qr {
+    width: 120px;
+  }
+  .bottom-nav {
+    height: 55px;
+  }
+  .nav-item .icon {
+    font-size: 1.2rem;
+  }
+  .nav-item {
+    font-size: 0.7rem;
+  }
+}
+
+/* 📱 Tawk.to widget responsiveness */
+iframe[src*="tawk.to"] {
+  max-width: 100% !important;
+  height: auto !important;
+  position: fixed !important;
+  bottom: 70px !important; /* hejuru gato ya bottom nav */
+  right: 10px !important;
+  z-index: 99999 !important;
+}
+@media (max-width: 768px) {
+  iframe[src*="tawk.to"] {
+    width: 90% !important;
+    bottom: 70px !important;
+    right: 5%;
+  }
 }
