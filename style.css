@@ -1,0 +1,385 @@
+/* Dreamy Aurora Gradient Glow Style
+   - Professional LP look
+   - Fast energetic animations
+   - Bottom nav fixed like app
+   - Mobile responsive
+*/
+
+/* 🎨 Palette */
+:root {
+  --lilac: #c7a4ff;
+  --sky: #9fdfff;
+  --peach: #ffc8a2;
+  --pearl: #fdfdff;
+  --accent: #ff7fbf;
+  --text-dark: #2b2430;
+  --text-light: #fdfdff;
+}
+
+/* Dark mode */
+body.dark {
+  --text-dark: #fdfdff;
+  --pearl: #1a1520;
+  --sky: #2a3a5f;
+  --lilac: #5a3a8f;
+  --peach: #5a3a2a;
+  --accent: #ff4fa0;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--pearl);
+  color: var(--text-dark);
+  scroll-behavior: smooth;
+}
+
+/* 🌙 Toggle */
+.btn-toggle {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 999;
+  background: var(--accent);
+  color: var(--text-light);
+  border: none;
+  border-radius: 999px;
+  padding: .7rem 1rem;
+  cursor: pointer;
+  box-shadow: 0 0 20px var(--accent);
+  transition: transform .2s ease;
+}
+.btn-toggle:hover { transform: scale(1.1); }
+
+/* 🦄 Hero */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.hero__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, var(--lilac), var(--sky), var(--peach));
+  opacity: 0.55;
+}
+.hero__content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: var(--text-light);
+  animation: popUp .4s ease-out both;
+}
+/* Title as Logo */
+.title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 900;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  background: linear-gradient(90deg, var(--lilac), var(--sky), var(--peach));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 30px var(--accent);
+  margin: 0;
+  padding: 0.5rem;
+  display: inline-block;
+  border-radius: 12px;
+  animation: logoPop .5s ease-out both;
+}
+/* Subtitle */
+.subtitle {
+  font-size: 1.2rem;
+  margin: 1rem auto;
+  padding: 0 1rem;
+  max-width: 600px;
+  line-height: 1.4;
+  color: var(--text-light);
+  text-shadow: 0 0 10px var(--lilac);
+}
+.cta {
+  display: inline-block;
+  background: linear-gradient(90deg, var(--sky), var(--lilac));
+  color: var(--text-dark);
+  padding: .8rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  font-weight: 600;
+  box-shadow: 0 0 15px var(--sky);
+  transition: transform .2s ease, box-shadow .2s ease;
+}
+.cta:hover { transform: scale(1.1); box-shadow: 0 0 25px var(--lilac); }
+
+/* 📦 Sections */
+.section {
+  padding: 2rem 1rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.section__title {
+  font-size: 1.6rem;
+  text-align: center;
+  margin-bottom: 1rem;
+}
+.section__desc {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1rem;
+}
+.section.alt {
+  background: linear-gradient(135deg, var(--peach), var(--sky), var(--lilac));
+  color: var(--text-light);
+  border-radius: 20px;
+  box-shadow: 0 0 25px var(--accent);
+  animation: fadeInFast .3s ease forwards;
+}
+
+/* Product Cards */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1rem;
+}
+.card {
+  background: var(--pearl);
+  border-radius: 20px;
+  box-shadow: 0 0 20px var(--lilac);
+  overflow: hidden;
+  transform: scale(0.95);
+  opacity: 0;
+  animation: zoomIn .3s ease forwards;
+}
+.card__img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.card__body { padding: 1rem; }
+.card__title { font-weight: 600; }
+.price { color: var(--accent); font-weight: 700; }
+
+/* ⭐ Testimonials */
+.testimonials {
+  display: grid;
+  gap: 1rem;
+}
+.testimonial-card {
+  background: var(--sky);
+  color: var(--text-dark);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 0 20px var(--accent);
+  animation: slideIn .3s ease forwards;
+}
+
+/* 😂 Jokes */
+.joke-box {
+  background: var(--lilac);
+  color: var(--text-light);
+  border-radius: 20px;
+  padding: 1rem;
+  box-shadow: 0 0 20px var(--peach);
+  animation: bounceIn .3s ease forwards;
+}
+.joke-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-top: .6rem;
+}
+.btn, .btn-outline {
+  padding: .6rem 1rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+}
+.btn { background: var(--accent); color: white; }
+.btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--text-dark); }
+
+/* 📍 Map */
+.map-wrap iframe {
+  border-radius: 20px;
+  box-shadow: 0 0 20px var(--accent);
+  animation: fadeInFast .3s ease forwards;
+  width: 100%;
+  height: 300px;
+}
+
+/* 💬 WhatsApp */
+.support-wrap {
+  display: grid;
+  gap: 1rem;
+  align-items: center;
+  justify-items: center;
+}
+.support-wrap .wa-link {
+  background: linear-gradient(90deg, var(--accent), var(--peach));
+  color: var(--text-light);
+  padding: .8rem 1.2rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 0 20px var(--accent);
+  transition: transform .2s ease;
+}
+.support-wrap .wa-link:hover { transform: scale(1.1); }
+.qr {
+  max-width: 160px;
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  box-shadow: 0 0 20px var(--accent);
+}
+
+/* 👣 Footer */
+.footer {
+  background: linear-gradient(180deg, var(--lilac), var(--sky));
+  color: var(--text-light);
+  padding: 2rem 1rem 5rem; /* extra bottom space for nav */
+  text-align: center;
+  box-shadow: 0 -5px 20px var(--accent);
+  animation: fadeInFast .3s ease forwards;
+}
+.footer__grid {
+  display: grid;
+  gap: 1rem;
+}
+.contacts, .socials {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.socials a {
+  margin: 0 .5rem;
+  color: var(--text-light);
+  text-decoration: none;
+}
+
+/* 📱 Bottom Navigation Bar */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  background: linear-gradient(90deg, var(--lilac), var(--sky), var(--peach));
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 0 -4px 12px rgba(0,0,0,0.2);
+  z-index: 9999;
+}
+.nav-item {
+  flex: 1;
+  text-align: center;
+  color: var(--text-light);
+  text-decoration: none;
+  font-size: 0.75rem;
+  transition: transform .2s ease, color .2s ease;
+}
+.nav-item .icon {
+  display: block;
+  font-size: 1.4rem;
+}
+.nav-item:hover {
+  transform: scale(1.1);
+  color: var(--accent);
+}
+
+/* ⚡ Animations */
+@keyframes popUp {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes logoPop {
+  from { transform: scale(0.8); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+@keyframes zoomIn {
+  from { opacity: 0; transform: scale(0.8); }
+  to { opacity: 1; transform: scale(1); }
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to { opacity: 1; transform: translateX(0); }
+}
+@keyframes bounceIn {
+  0% { transform: scale(0.8); opacity: 0; }
+  60% { transform: scale(1.1); opacity: 1; }
+  100% { transform: scale(1); }
+}
+@keyframes fadeInFast {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* 📱 Mobile Responsiveness */
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+  }
+  .subtitle {
+    font-size: 0.95rem;
+    line-height: 1.3;
+    padding: 0 0.5rem;
+  }
+  .section__title {
+    font-size: 1.3rem;
+  }
+  .section__desc {
+    font-size: 0.9rem;
+  }
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .testimonial-card {
+    font-size: 0.9rem;
+  }
+  .joke-box {
+    font-size: 0.9rem;
+  }
+  .map-wrap iframe {
+    height: 220px;
+  }
+  .support-wrap .wa-link {
+    font-size: 0.9rem;
+    padding: .6rem 1rem;
+  }
+  .qr {
+    max-width: 120px;
+  }
+  .bottom-nav {
+    height: 55px;
+  }
+  .nav-item .icon {
+    font-size: 1.2rem;
+  }
+  .nav-item {
+    font-size: 0.7rem;
+  }
+}
+
+/* 📱 Tawk.to widget responsiveness */
+iframe[src*="tawk.to"] {
+  max-width: 100% !important;
+  height: auto !important;
+  position: fixed !important;
+  bottom: 70px !important; /* hejuru gato ya bottom nav */
+  right: 10px !important;
+  z-index: 99999 !important;
+}
+@media (max-width: 768px) {
+  iframe[src*="tawk.to"] {
+    width: 90% !important;
+    bottom: 70px !important;
+    right: 5%;
+  }
+}
