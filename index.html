@@ -5,13 +5,19 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Audrey Salon — Ubwiza n’ituze</title>
   <meta name="description" content="Audrey Salon: ubukangurambaga bw’ubwiza, hairstyle, nail art, makeup, spa—serivisi nziza ku giciro gito." />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="icon" href="icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="icons/icon-192.png" />
-  <!-- Style -->
-  <link rel="stylesheet" href="style.css" />
-  <!-- SEO basic -->
+
+  <!-- Manifest -->
+  <link rel="manifest" href="/manifest.json" />
+
+  <!-- Icons -->
+  <link rel="icon" href="/icons/icon-192.png" />
+  <link rel="apple-touch-icon" href="/icons/icon-192.png" />
+
+  <!-- Theme color -->
   <meta name="theme-color" content="#ffd6e7" />
+
+  <!-- Style -->
+  <link rel="stylesheet" href="/style.css" />
 </head>
 <body>
   <!-- Dark Mode Toggle -->
@@ -19,10 +25,8 @@
 
   <!-- Hero with video background + fallback image -->
   <header class="hero">
-    <video class="hero__video" autoplay muted loop playsinline poster="assets/fallback.jpg">
-      <!-- Placeholder video; ushobora kuyisimbuza iy’ukuri -->
-      <source src="assets/beauty-bg.mp4" type="video/mp4" />
-      <!-- Fallback image niba video yananiwe -->
+    <video class="hero__video" autoplay muted loop playsinline poster="/assets/fallback.jpg">
+      <source src="/assets/beauty-bg.mp4" type="video/mp4" />
       Your browser does not support HTML5 video.
     </video>
     <div class="hero__overlay"></div>
@@ -99,8 +103,14 @@
          href="https://wa.me/25771633859?text=Mwaramutse%20Audrey%20Salon%2C%20ndifuza%20rendez-vous%20kuri%20serivisi%20ya%20%5Bhair%20%2F%20nails%20%2F%20makeup%5D.">
         WhatsApp: SABA Rendez-vous📑
       </a>
-      <img class="qr" src="assets/whatsapp-qr.png" alt="QR WhatsApp" />
+      <img class="qr" src="/assets/whatsapp-qr.png" alt="QR WhatsApp" />
     </div>
+  </section>
+
+  <!-- Install Banner -->
+  <section id="installBanner" class="hidden banner">
+    <p>📲 Shyira Audrey-Salon ku murongo wawe!</p>
+    <button id="installBtn" class="btn">Install App</button>
   </section>
 
   <!-- Footer with Tawk.to -->
@@ -123,7 +133,7 @@
         </div>
       </div>
       <div class="footer__qr">
-        <img src="assets/salon-qr.png" alt="QR code ya Salon" />
+        <img src="/assets/salon-qr.png" alt="QR code ya Salon" />
       </div>
     </div>
     <p class="copy">© Audrey Salon — Ubwiza n’ituze</p>
@@ -144,8 +154,8 @@
   </footer>
 
   <!-- Scripts -->
-  <script src="products.js"></script>
-  <script src="jokes.js"></script>
-  <script src="main.js"></script>
+  <script src="/products.js"></script>
+  <script src="/jokes.js"></script>
+  <script src="/main.js"></script>
 </body>
 </html>
