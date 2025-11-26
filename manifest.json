@@ -1,13 +1,13 @@
 {
-  "name": "Broskie Salon",
-  "short_name": "Salon",
-  "description": "Landing Page ya Broskie Salon: hairstyle, nail art, makeup, spa, WhatsApp, Tawk.to, na PWA.",
-  "start_url": "./index.html",
+  "name": "Audrey-Salon",
+  "short_name": "Audrey",
+  "description": "Landing Page ya Audrey Salon: hairstyle, nail art, makeup, spa, WhatsApp, Tawk.to, na PWA.",
+  "start_url": "/index.html",
   "display": "standalone",
   "background_color": "#ffd6e7",
   "theme_color": "#ffd6e7",
   "icons": [
-    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" }
   ]
 }
